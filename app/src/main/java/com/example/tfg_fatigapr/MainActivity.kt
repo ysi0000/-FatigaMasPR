@@ -39,10 +39,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:Int=0
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    inline fun <reified T> genericType() = object: TypeToken<T>() {}.type
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -54,7 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        val usuarios:List<Usuario>
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -63,9 +60,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-        var gson=Gson()
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(this,
+
+        if (ContextCompat.checkSelfPermission(this.applicationContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
 
@@ -86,47 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
-        } else {
-            // Permission has already been granted
-            /*var gson=Gson()
-            var f=File("/sdcard/Download/file.json").readText()*/
-           /* val bufferedReader: BufferedReader = f.bufferedReader()
-            val inputString = bufferedReader.use { it.readText() }*/
-            var jsonPrueba=retjson()
-
-            try {
-
-                /*val turnsType = object : TypeToken<List<Usuario>>() {}.type
-                var post= gson.fromJson<List<Usuario>>(inputString, turnsType)*/
-                val tipoUsurio = genericType<List<Usuario>>()
-                usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
-                viewManager = LinearLayoutManager(this)
-                viewAdapter = AdaptadorEjercicios(usuarios[0].dia)
-                var dia=findViewById<TextView>(R.id.dia)
-                dia.text=usuarios[0].dia[0].id
-                recyclerView = findViewById<RecyclerView>(R.id.recycler_ejercicios).apply {
-                    // use this setting to improve performance if you know that changes
-                    // in content do not change the layout size of the RecyclerView
-                    setHasFixedSize(true)
-
-                    // use a linear layout manager
-                    layoutManager = viewManager
-
-                    // specify an viewAdapter (see also next example)
-                    adapter = viewAdapter
-                }
-                Log.d("TAG","TAG "+usuarios[0].nombre)
-            }catch (e:Exception){
-                Log.d("TAG","Error json")
-            }
         }
-
-        val permissionCheck = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        )
-
-
 
 
         }
@@ -166,9 +122,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+            R.id.nav_inicio -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+                    FragmentoEjercicios()).commit()
+            }
             R.id.nav_graficas -> {
-                var graficaIntent=Intent(this,Graficas::class.java)
-                startActivity(graficaIntent)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+                        FragmentoGraficas()).commit()
             }
             R.id.nav_calendario -> {
 
