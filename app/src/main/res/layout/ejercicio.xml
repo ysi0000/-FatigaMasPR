@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content"
+              android:id="@+id/LL_ejercicios">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ejercicio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/tamaño_ejercicios"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorBlanco"
+            android:background="@color/colorPrimary"
+            android:id="@+id/tv_ejercicio"
     />
+            <!--android:onClick="mostrarOcultarRecyclerSeries"!-->
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/CL_ejercicio"
+
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitulo_ejercicios_Peso"
+                android:id="@+id/tv_titulo_peso"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitulo_ejercicios_Repeticiones"
+                android:id="@+id/tv_titulo_repeticiones"
+                app:layout_constraintEnd_toStartOf="@+id/tv_titulo_RPE"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toEndOf="@+id/tv_titulo_peso"
+                android:layout_marginStart="8dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitulo_ejercicios_RPE"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:id="@+id/tv_titulo_RPE"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycler_series">
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

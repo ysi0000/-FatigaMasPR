@@ -18,4 +18,8 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="titulo_ejercicios">Ejercicios</string>
+    <string name="subtitulo_ejercicios_Peso">Peso</string>
+    <string name="subtitulo_ejercicios_Repeticiones">Repeticiones</string>
+    <string name="subtitulo_ejercicios_RPE">RPE</string>
+
 </resources>

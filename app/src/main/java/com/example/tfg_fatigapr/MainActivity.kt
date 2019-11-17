@@ -1,7 +1,9 @@
 package com.example.tfg_fatigapr
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -17,19 +19,29 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:Int=0
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
     inline fun <reified T> genericType() = object: TypeToken<T>() {}.type
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,6 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        val usuarios:List<Usuario>
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -80,12 +93,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
            /* val bufferedReader: BufferedReader = f.bufferedReader()
             val inputString = bufferedReader.use { it.readText() }*/
             var jsonPrueba=retjson()
+
             try {
 
                 /*val turnsType = object : TypeToken<List<Usuario>>() {}.type
                 var post= gson.fromJson<List<Usuario>>(inputString, turnsType)*/
                 val tipoUsurio = genericType<List<Usuario>>()
-                val usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
+                usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
+                viewManager = LinearLayoutManager(this)
+                viewAdapter = AdaptadorEjercicios(usuarios[0].dia)
+                var dia=findViewById<TextView>(R.id.dia)
+                dia.text=usuarios[0].dia[0].id
+                recyclerView = findViewById<RecyclerView>(R.id.recycler_ejercicios).apply {
+                    // use this setting to improve performance if you know that changes
+                    // in content do not change the layout size of the RecyclerView
+                    setHasFixedSize(true)
+
+                    // use a linear layout manager
+                    layoutManager = viewManager
+
+                    // specify an viewAdapter (see also next example)
+                    adapter = viewAdapter
+                }
                 Log.d("TAG","TAG "+usuarios[0].nombre)
             }catch (e:Exception){
                 Log.d("TAG","Error json")
@@ -97,12 +126,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
 
+
+
+
+        }
+
         /*var f=File("/sdcard/Download/file.json")
         val bufferedReader: BufferedReader = f.bufferedReader()
         //gson.fromJson<>()
         val inputString = bufferedReader.use { it.readText() }
         var post = gson.fromJson(inputString, Usuario::class.java)*/
-    }
+
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -132,11 +166,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_inicio -> {
-                // Handle the camera action
-            }
             R.id.nav_graficas -> {
-
+                var graficaIntent=Intent(this,Graficas::class.java)
+                startActivity(graficaIntent)
             }
             R.id.nav_calendario -> {
 
@@ -193,5 +225,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 "RPE: 10,reps: 5},{id: 2,peso: 160,RPE: 8,reps: 5}]},{id: 2015-03-11,nombre: Hancock,modificaciones: 2,"+
                 "ejercicios: [{id: 0,peso: 199,RPE: 4,reps: 8},{id: 1,peso: 37,RPE: 1,reps: 1},{id: 2,peso: 179,RPE: 1,reps: 1}]}]}]"
     }
+
+    /*fun mostrarOcultarRecyclerSeries(view: View){
+        val recyclerSeries=findViewById<RecyclerView>(R.id.recycler_series)
+        val CLayout=findViewById(R.id.CL_ejercicio) as ConstraintLayout
+        Log.d("Boton Pulsado","botonP")
+        if (CLayout.visibility==View.GONE) {
+            CLayout.visibility = View.VISIBLE
+            recyclerSeries.visibility = View.VISIBLE
+        }
+        else{
+            CLayout.visibility=View.GONE
+            recyclerSeries.visibility=View.GONE
+        }
+    }*/
 
 }
