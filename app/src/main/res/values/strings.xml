@@ -22,4 +22,7 @@
     <string name="subtitulo_ejercicios_Repeticiones">Repeticiones</string>
     <string name="subtitulo_ejercicios_RPE">RPE</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
