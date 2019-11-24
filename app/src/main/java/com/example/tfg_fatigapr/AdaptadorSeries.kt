@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-public class AdaptadorSeries(private val myDataset: List<Ejercicio>) :RecyclerView.Adapter<AdaptadorSeries.MyViewHolder>(){
+public class AdaptadorSeries(private val myDataset: List<Serie>) :RecyclerView.Adapter<AdaptadorSeries.MyViewHolder>(){
 
     class MyViewHolder: RecyclerView.ViewHolder
     {

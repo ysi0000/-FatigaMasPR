@@ -34,6 +34,8 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 
@@ -46,12 +48,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        val fab: FloatingActionButton = findViewById(R.id.fab)
+        /*val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-
+*/
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(

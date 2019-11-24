@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
-public class AdaptadorEjercicios(private val myDataset: List<Dia>) :RecyclerView.Adapter<AdaptadorEjercicios.MyViewHolder>(){
+public class AdaptadorEjercicios(private val myDataset: List<Ejercicio>) :RecyclerView.Adapter<AdaptadorEjercicios.MyViewHolder>(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -16,6 +17,7 @@ public class AdaptadorEjercicios(private val myDataset: List<Dia>) :RecyclerView
     {
         var textView:TextView
         var recyclerView:RecyclerView
+
         constructor(view: View) : super(view) {
             textView=view.findViewById(R.id.tv_ejercicio)
             recyclerView=view.findViewById(R.id.recycler_series)
@@ -26,7 +28,7 @@ public class AdaptadorEjercicios(private val myDataset: List<Dia>) :RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.textView.text=myDataset[position].nombre
         viewManager = LinearLayoutManager(holder.recyclerView.context)
-        viewAdapter = AdaptadorSeries(myDataset[position].ejercicios)
+        viewAdapter = AdaptadorSeries(myDataset[position].series)
         holder.recyclerView.apply {
             setHasFixedSize(true)
 
