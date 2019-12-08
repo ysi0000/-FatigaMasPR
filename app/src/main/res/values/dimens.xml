@@ -11,4 +11,5 @@
     <dimen name="dimension_imagen">100dp</dimen>
     <dimen name="sangria_titulo">8dp</dimen>
     <dimen name="tamaño_ejercicios">24sp</dimen>
+    <dimen name="tamaño_tv_aEjercicio">32sp</dimen>
 </resources>

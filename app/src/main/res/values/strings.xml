@@ -23,7 +23,10 @@
     <string name="subtitulo_ejercicios_RPE">RPE</string>
     <string name="formatodiamesao">%1$s-%2$s-%3$s</string>
     <string name="formatodiames">%1$s-%2$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bt_anadirEjercicio">Añadir ejercicio</string>
+
+    <string name="key_editpref_nombre">Nombre</string>
+    <string name="key_editpref_peso">Peso</string>
+    <string name="title_activity_actividad_opciones">ActividadOpciones</string>
 
 </resources>

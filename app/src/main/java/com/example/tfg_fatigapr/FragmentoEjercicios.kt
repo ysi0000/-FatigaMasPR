@@ -2,6 +2,7 @@ package com.example.tfg_fatigapr
 
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -12,13 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tfg_fatigapr.clasesDatos.Usuario
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.content_main.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -53,6 +53,7 @@ class FragmentoEjercicios : Fragment() {
         val usuarios:List<Usuario>
         val botonatras=view.findViewById<Button>(R.id.bt_diaAnterior)
         val botonalante=view.findViewById<Button>(R.id.bt_diaPosterior)
+        val botonañadirEjercicio=view.findViewById<Button>(R.id.bt_anadirEjercicio)
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -68,8 +69,15 @@ class FragmentoEjercicios : Fragment() {
 
                 /*val turnsType = object : TypeToken<List<Usuario>>() {}.type
                 var post= gson.fromJson<List<Usuario>>(inputString, turnsType)*/
+                if(context!=null) {
+                    val db = RoomDataBase.getInstance(context!!)
+                    var usuario = db?.usuariosDAO()!!.seleccionarusuario("Yeray")
+
+                }
                 val tipoUsurio = genericType<List<Usuario>>()
                 usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
+
+                //region Listeners botones
                 botonatras.setOnClickListener{
                     val dia=view.findViewById<TextView>(R.id.dia)
                     val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -84,6 +92,7 @@ class FragmentoEjercicios : Fragment() {
                     dia.text=getString(R.string.formatodiamesao,c.get(Calendar.DATE).toString(),(c.get(Calendar.MONTH)+1).toString(),c.get(Calendar.YEAR).toString())//c.get(Calendar.DATE).toString()+"-"+(c.get(Calendar.MONTH)+1).toString()+"-"+c.get(Calendar.YEAR).toString()//dayeundiamas.date.toString()+"-"+dayeundiamas.month.toString()+"-"+dayeundiamas..toString()
                     cargarDia(usuarios[0],dia,view)
                 }
+
                 botonalante.setOnClickListener{
                     val dia=view.findViewById<TextView>(R.id.dia)
                     val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -98,6 +107,12 @@ class FragmentoEjercicios : Fragment() {
                     dia.text=getString(R.string.formatodiamesao,c.get(Calendar.DATE).toString(),(c.get(Calendar.MONTH)+1).toString(),c.get(Calendar.YEAR).toString())//dayeundiamas.date.toString()+"-"+dayeundiamas.month.toString()+"-"+dayeundiamas..toString()
                     cargarDia(usuarios[0],dia,view)
                 }
+
+                botonañadirEjercicio.setOnClickListener{
+                    var intentAñadirEjercicio= Intent(context,AnadirEjercicio::class.java)
+                    startActivityForResult(intentAñadirEjercicio,1)
+                }
+                //endregion
                 val dia=view.findViewById<TextView>(R.id.dia)
                 dia.text =if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     DateTimeFormatter.ofPattern("dd-MM-yyyy").toString()
@@ -125,7 +140,7 @@ class FragmentoEjercicios : Fragment() {
     }
 
 
-    fun cargarDia(usuario:Usuario,dia:TextView,view:View) {
+    fun cargarDia(usuario: Usuario, dia:TextView, view:View) {
         var diaencontrado = false
         for (d in usuario.dia) {
             if (d.id == dia.text.toString()) {
@@ -173,7 +188,7 @@ class FragmentoEjercicios : Fragment() {
                     "peso:64," +
                     "dia:[" +
                     "{" +
-                        "id:23-11-2019,"+
+                        "id:30-11-2019,"+
                         "ejercicios: [" +
                         "{" +
                             "nombre:Sentadilla," +

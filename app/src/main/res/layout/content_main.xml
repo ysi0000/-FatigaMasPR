@@ -8,6 +8,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".MainActivity">
+
 <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -44,11 +45,21 @@
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/bt_anadirEjercicio"
+            android:drawableStart="@drawable/ic_add_circle_orange_10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/titulo_aplicacion"
+            android:id="@+id/bt_anadirEjercicio"
+    />
     <androidx.recyclerview.widget.RecyclerView
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/recycler_ejercicios"
 
     />

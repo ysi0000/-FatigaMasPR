@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+            android:key="@string/key_editpref_nombre"
+            android:title="@string/key_editpref_nombre"
+            />
+    <EditTextPreference
+            android:key="@string/key_editpref_peso"
+            android:title="@string/key_editpref_peso"
+
+            />
+</PreferenceScreen>

@@ -1,13 +1,12 @@
 package com.example.tfg_fatigapr
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
+import com.example.tfg_fatigapr.clasesDatos.Ejercicio
 
 public class AdaptadorEjercicios(private val myDataset: List<Ejercicio>) :RecyclerView.Adapter<AdaptadorEjercicios.MyViewHolder>(){
     private lateinit var recyclerView: RecyclerView

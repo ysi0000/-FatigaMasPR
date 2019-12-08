@@ -3,14 +3,8 @@ package com.example.tfg_fatigapr
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.opengl.Visibility
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.os.Environment.getExternalStorageDirectory
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -19,24 +13,15 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.tfg_fatigapr.clasesDatos.Dia
+import com.example.tfg_fatigapr.clasesDatos.Serie
+import com.example.tfg_fatigapr.clasesDatos.Usuario
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
 import java.io.File
-import java.io.FileWriter
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -54,6 +39,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .setAction("Action", null).show()
         }
 */
+        /*try {
+            var serie= Serie()
+            val db = RoomDataBase.getInstance(this)
+            db?.usuariosDAO()!!.nuevoUsuario(Usuario(0, "Yeray", 70,Dia()))
+            Log.d("Size", db.usuariosDAO().seleccionarUsuarios().size.toString())
+        }catch (e:Exception){
+            Log.d("Size","Error")
+        }*/
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
@@ -115,10 +108,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        //var intent=Intent(this,ActividadOpciones::class.java)
+        when (item.itemId) {
+            R.id.action_settings -> true//startActivity(intent)
         }
+        return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -136,14 +130,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_opciones -> {
-
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+                    FragmentoOpcionesUsuario()).commit()
             }
-            /*R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }*/
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
