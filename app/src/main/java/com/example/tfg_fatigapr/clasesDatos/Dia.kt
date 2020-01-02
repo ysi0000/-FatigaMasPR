@@ -10,5 +10,5 @@ data class Dia (
     val id:String,
     @ColumnInfo(name = "Ejercicios")
     @TypeConverters(ConversorEjericicio::class)
-    val ejercicios:List<Ejercicio>
+    val ejercicios:MutableList<Ejercicio>
 )

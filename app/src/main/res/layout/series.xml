@@ -2,36 +2,55 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CL_series">
 
-    <EditText
+    <TextView
+            android:id="@+id/id_serie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edittext_peso"
-            android:text="@string/subtitulo_ejercicios_Peso"
-            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"/>
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
     <EditText
+            android:id="@+id/edittext_peso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edittext_repeticiones"
-            android:text="@string/subtitulo_ejercicios_Repeticiones"
+            android:layout_marginStart="32dp"
             android:inputType="number"
+            android:text="@string/subtitulo_ejercicios_Peso"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/id_serie"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    <EditText
+            android:id="@+id/edittext_repeticiones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:inputType="number"
+            android:text="@string/subtitulo_ejercicios_Repeticiones"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/edittext_RPE"
             app:layout_constraintStart_toEndOf="@+id/edittext_peso"
-            android:layout_marginStart="8dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
+            android:id="@+id/edittext_RPE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edittext_RPE"
-            android:text="@string/subtitulo_ejercicios_RPE"
-            android:inputType="number"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:inputType="number"
+            android:text="@string/subtitulo_ejercicios_RPE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

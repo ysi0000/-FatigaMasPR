@@ -45,17 +45,38 @@
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/bt_anadirEjercicio"
-            android:drawableStart="@drawable/ic_add_circle_orange_10dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/titulo_aplicacion"
-            android:id="@+id/bt_anadirEjercicio"
-    />
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/bt_anadirEjercicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:drawableStart="@drawable/ic_add_circle_orange_10dp"
+                android:text="@string/bt_anadirEjercicio"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/titulo_aplicacion"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/bt_guardar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+                android:id="@+id/bt_guardar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/guardar"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/titulo_aplicacion"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
 
             android:layout_width="match_parent"
@@ -63,9 +84,6 @@
             android:id="@+id/recycler_ejercicios"
 
     />
-
-
-
 
 
 </LinearLayout>

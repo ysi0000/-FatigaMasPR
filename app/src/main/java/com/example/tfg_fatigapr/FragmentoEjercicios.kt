@@ -3,6 +3,7 @@ package com.example.tfg_fatigapr
 
 import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -14,11 +15,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_fatigapr.clasesDatos.Usuario
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.content_main.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -37,6 +40,7 @@ class FragmentoEjercicios : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
+    lateinit var usuario:Usuario
 
     inline fun <reified T> genericType() = object: TypeToken<T>() {}.type
     override fun onCreateView(
@@ -53,7 +57,7 @@ class FragmentoEjercicios : Fragment() {
         val usuarios:List<Usuario>
         val botonatras=view.findViewById<Button>(R.id.bt_diaAnterior)
         val botonalante=view.findViewById<Button>(R.id.bt_diaPosterior)
-        val botonañadirEjercicio=view.findViewById<Button>(R.id.bt_anadirEjercicio)
+        val botonanadirEjercicio=view.findViewById<Button>(R.id.bt_anadirEjercicio)
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -64,69 +68,75 @@ class FragmentoEjercicios : Fragment() {
             /* val bufferedReader: BufferedReader = f.bufferedReader()
              val inputString = bufferedReader.use { it.readText() }*/
             var jsonPrueba=retjson()
-
+            val sharedPreferences: SharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(context)
             try {
 
                 /*val turnsType = object : TypeToken<List<Usuario>>() {}.type
                 var post= gson.fromJson<List<Usuario>>(inputString, turnsType)*/
                 if(context!=null) {
-                    val db = RoomDataBase.getInstance(context!!)
-                    var usuario = db?.usuariosDAO()!!.seleccionarusuario("Yeray")
+                    val db= RoomDataBase.getInstance(context!!)!!
+                    val st=getString(R.string.key_editpref_nombre)
+                    val str=sharedPreferences.getString(st,"")!!
+                    usuario = db.usuariosDAO().seleccionarusuario(str)
 
                 }
-                val tipoUsurio = genericType<List<Usuario>>()
-                usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
+                //val tipoUsurio = genericType<List<Usuario>>()
+                //usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
 
                 //region Listeners botones
                 botonatras.setOnClickListener{
                     val dia=view.findViewById<TextView>(R.id.dia)
-                    val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        LocalDate.parse(dia.text.toString()) as Date
-                    } else {
-                        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
-                        dateFormat.parse(dia.text.toString())
-                    }
+                    //Quitado el if por un fallo en LocalDate ->Probar con otros SDK
+                    //val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    //  LocalDate.parse(dia.text.toString()) as Date
+                    //} else {
+                    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
+                    val d=dateFormat.parse(dia.text.toString())
+                    //}
                     val c=Calendar.getInstance()
                     c.time=d
                     c.add(Calendar.DATE,-1)
                     dia.text=getString(R.string.formatodiamesao,c.get(Calendar.DATE).toString(),(c.get(Calendar.MONTH)+1).toString(),c.get(Calendar.YEAR).toString())//c.get(Calendar.DATE).toString()+"-"+(c.get(Calendar.MONTH)+1).toString()+"-"+c.get(Calendar.YEAR).toString()//dayeundiamas.date.toString()+"-"+dayeundiamas.month.toString()+"-"+dayeundiamas..toString()
-                    cargarDia(usuarios[0],dia,view)
+                    cargarDia(usuario,dia,view)
                 }
 
                 botonalante.setOnClickListener{
                     val dia=view.findViewById<TextView>(R.id.dia)
-                    val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        LocalDate.parse(dia.text.toString()) as Date
-                    } else {
-                        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
-                        dateFormat.parse(dia.text.toString())
-                    }
+                    //val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    //  LocalDate.parse(dia.text.toString()) as Date
+                    //} else {
+                    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
+                    val d=dateFormat.parse(dia.text.toString())
+                    //}
                     val c=Calendar.getInstance()
                     c.time=d
                     c.add(Calendar.DATE,1)
                     dia.text=getString(R.string.formatodiamesao,c.get(Calendar.DATE).toString(),(c.get(Calendar.MONTH)+1).toString(),c.get(Calendar.YEAR).toString())//dayeundiamas.date.toString()+"-"+dayeundiamas.month.toString()+"-"+dayeundiamas..toString()
-                    cargarDia(usuarios[0],dia,view)
+                    cargarDia(usuario,dia,view)
                 }
 
-                botonañadirEjercicio.setOnClickListener{
-                    var intentAñadirEjercicio= Intent(context,AnadirEjercicio::class.java)
-                    startActivityForResult(intentAñadirEjercicio,1)
+                botonanadirEjercicio.setOnClickListener{
+                    val dia=view.findViewById<TextView>(R.id.dia)
+                    var intentAnadirEjercicio= Intent(context,AnadirEjercicio::class.java)
+                    intentAnadirEjercicio.putExtra("dia",view.findViewById<TextView>(R.id.dia).text.toString())
+                    startActivityForResult(intentAnadirEjercicio,1)
                 }
                 //endregion
                 val dia=view.findViewById<TextView>(R.id.dia)
-                dia.text =if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    DateTimeFormatter.ofPattern("dd-MM-yyyy").toString()
-                }else{
-                    var date = Date()
-                    val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
-                    formatter.format(date)
-                }
-                cargarDia(usuarios[0],dia,view)
+                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                //DateTimeFormatter.ofPattern("dd-MM-yyyy").toString()
+                //}else{
+                var date = Date()
+                val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
+                dia.text =formatter.format(date)
+                //}
+                cargarDia(usuario,dia,view)
 
 
 
-                cargarDia(usuarios[0],dia,view)
-                Log.d("TAG","TAG "+usuarios[0].nombre)
+                cargarDia(usuario,dia,view)
+                Log.d("TAG","TAG "+usuario.nombre)
             }catch (e:Exception){
                 Log.d("TAG","Error json")
             }
@@ -144,7 +154,7 @@ class FragmentoEjercicios : Fragment() {
         var diaencontrado = false
         for (d in usuario.dia) {
             if (d.id == dia.text.toString()) {
-                viewAdapter = AdaptadorEjercicios(d.ejercicios)
+                viewAdapter = AdaptadorEjercicios(d.ejercicios,dia.text.toString())
                 viewManager = LinearLayoutManager(context)
                 recyclerView = view.findViewById<RecyclerView>(R.id.recycler_ejercicios).apply {
                     // use this setting to improve performance if you know that changes
@@ -162,7 +172,7 @@ class FragmentoEjercicios : Fragment() {
             }
         }
         if (!diaencontrado) {
-            viewAdapter = AdaptadorEjercicios(emptyList())
+            viewAdapter = AdaptadorEjercicios(emptyList(),"")
             viewManager = LinearLayoutManager(context)
             recyclerView = view.findViewById<RecyclerView>(R.id.recycler_ejercicios).apply {
                 // use this setting to improve performance if you know that changes
@@ -180,6 +190,20 @@ class FragmentoEjercicios : Fragment() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        try {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            if (requestCode == 1  && resultCode  == 0) {
+                usuario = RoomDataBase.getInstance(context!!)!!.usuariosDAO().seleccionarusuario(usuario.nombre)
+                cargarDia(usuario,dia,view!!)
+
+            }
+        } catch (ex:Exception) {
+
+        }
+
+    }
     fun retjson():String{
         return "[" +
                 "{" +

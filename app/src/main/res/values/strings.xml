@@ -28,5 +28,6 @@
     <string name="key_editpref_nombre">Nombre</string>
     <string name="key_editpref_peso">Peso</string>
     <string name="title_activity_actividad_opciones">ActividadOpciones</string>
+    <string name="guardar">Guardar</string>
 
 </resources>

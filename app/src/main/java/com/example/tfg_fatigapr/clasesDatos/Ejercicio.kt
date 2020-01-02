@@ -15,6 +15,6 @@ data class Ejercicio(
     val modificaciones:String,
     @ColumnInfo(name="Series")
     @TypeConverters(ConversorSerie::class)
-    val series:List<Serie>
+    val series:MutableList<Serie>
 )
 

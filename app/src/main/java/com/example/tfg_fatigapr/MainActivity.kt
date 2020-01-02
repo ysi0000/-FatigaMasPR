@@ -13,8 +13,10 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import com.example.tfg_fatigapr.clasesDatos.Dia
 import com.example.tfg_fatigapr.clasesDatos.Serie
 import com.example.tfg_fatigapr.clasesDatos.Usuario
@@ -49,13 +51,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }*/
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-
+        /*val navHeader=navView.getHeaderView(0)
+        var usuario=navHeader.findViewById<TextView>(R.id.nombreusuario)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val st=getString(R.string.key_editpref_nombre)
+        val str=sharedPreferences.getString(st,"")!!
+        usuario.text=str*/
         if (ContextCompat.checkSelfPermission(this.applicationContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
@@ -145,14 +153,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    var gson=Gson()
-                    var f=File("/sdcard/Download/file.json")
-                    val bufferedReader: BufferedReader = f.bufferedReader()
-                    //gson.fromJson<>()
-                    val inputString = bufferedReader.use { it.readText() }
-                    var post = gson.fromJson(inputString, Usuario::class.java)
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
