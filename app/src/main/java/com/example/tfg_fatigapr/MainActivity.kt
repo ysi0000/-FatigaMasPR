@@ -1,10 +1,8 @@
 package com.example.tfg_fatigapr
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -17,13 +15,6 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import com.example.tfg_fatigapr.clasesDatos.Dia
-import com.example.tfg_fatigapr.clasesDatos.Serie
-import com.example.tfg_fatigapr.clasesDatos.Usuario
-import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.File
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,35 +26,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        /*val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-*/
-        /*try {
-            var serie= Serie()
-            val db = RoomDataBase.getInstance(this)
-            db?.usuariosDAO()!!.nuevoUsuario(Usuario(0, "Yeray", 70,Dia()))
-            Log.d("Size", db.usuariosDAO().seleccionarUsuarios().size.toString())
-        }catch (e:Exception){
-            Log.d("Size","Error")
-        }*/
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
-
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+            FragmentoOpcionesUsuario()).commit()
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-        /*val navHeader=navView.getHeaderView(0)
+        val navHeader=navView.getHeaderView(0)
         var usuario=navHeader.findViewById<TextView>(R.id.nombreusuario)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val st=getString(R.string.key_editpref_nombre)
         val str=sharedPreferences.getString(st,"")!!
-        usuario.text=str*/
+        usuario.text=str
         if (ContextCompat.checkSelfPermission(this.applicationContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
@@ -89,12 +68,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         }
-
-        /*var f=File("/sdcard/Download/file.json")
-        val bufferedReader: BufferedReader = f.bufferedReader()
-        //gson.fromJson<>()
-        val inputString = bufferedReader.use { it.readText() }
-        var post = gson.fromJson(inputString, Usuario::class.java)*/
 
 
     override fun onBackPressed() {

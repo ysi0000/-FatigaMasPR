@@ -17,13 +17,12 @@
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:textStyle="bold"
     />
-    <EditText
+    <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:id="@+id/editText_aejercicio"
+            android:id="@+id/bt_nuevoEj"
+            android:onClick="seleccionarEjercicio"/>
 
-/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

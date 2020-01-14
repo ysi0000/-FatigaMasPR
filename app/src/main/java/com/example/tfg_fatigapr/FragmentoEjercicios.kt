@@ -128,7 +128,7 @@ class FragmentoEjercicios : Fragment() {
                 //DateTimeFormatter.ofPattern("dd-MM-yyyy").toString()
                 //}else{
                 var date = Date()
-                val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
+                val formatter = SimpleDateFormat("d-M-yyyy", Locale.FRANCE)
                 dia.text =formatter.format(date)
                 //}
                 cargarDia(usuario,dia,view)

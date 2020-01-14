@@ -1,12 +1,15 @@
 package com.example.tfg_fatigapr
 
 
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.preference.PreferenceManager
+import androidx.preference.PreferenceManager.*
 import com.example.tfg_fatigapr.clasesDatos.Usuario
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -34,7 +37,7 @@ private const val ARG_PARAM2 = "param2"
  */
 public class FragmentoGraficas : Fragment() {
     inline fun <reified T> genericType() = object: TypeToken<T>() {}.type
-
+    lateinit var usuario:Usuario
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,15 +49,24 @@ public class FragmentoGraficas : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val lineChartView = view.findViewById<LineChart>(R.id.linechart)
-        val diaActual=if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        /*val diaActual=if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             DateTimeFormatter.ofPattern("dd-MM-yyyy").toString()
-        }else{
+        }else{*/
             var date = Date()
-            val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
-            formatter.format(date)
+            val formatter = SimpleDateFormat("d-M-yyyy", Locale.FRANCE)
+        val diaActual=formatter.format(date)
+        //}
+        val sharedPreferences: SharedPreferences =
+            getDefaultSharedPreferences(context)
+        if(context!=null) {
+            val db= RoomDataBase.getInstance(context!!)!!
+            val st=getString(R.string.key_editpref_nombre)
+            val str=sharedPreferences.getString(st,"")!!
+            usuario = db.usuariosDAO().seleccionarusuario(str)
+
         }
         val xVal= arrayListOf<String>(cambiarDia(diaActual,-2),cambiarDia(diaActual,-1),diaActual,cambiarDia(diaActual,1))
-        var lineDataSet = LineDataSet(dataValues(xVal), "Data Set")
+        var lineDataSet = LineDataSet(dataValues(xVal), "Volumen")
         var datasets = ArrayList<ILineDataSet>()
         datasets.add(lineDataSet)
         var data = LineData(datasets)
@@ -77,12 +89,12 @@ public class FragmentoGraficas : Fragment() {
     }
 
     fun cambiarDia(dia:String,offset:Int):String{
-        val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        /*val d= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDate.parse(dia) as Date
-        } else {
-            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE)
-            dateFormat.parse(dia)
-        }
+        } else {*/
+            val dateFormat = SimpleDateFormat("d-M-yyyy", Locale.FRANCE)
+            val d=dateFormat.parse(dia)
+        //}
         val c=Calendar.getInstance()
         c.time=d
         c.add(Calendar.DATE,offset)
@@ -95,9 +107,11 @@ public class FragmentoGraficas : Fragment() {
         var jsonPrueba=retjson()
         val tipoUsurio = genericType<List<Usuario>>()
         var volumenDia:Float=0f
-        usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
-        for (d in usuarios[0].dia) {
-            if (d.id.substring(0,5) == dia.substring(0,5)) {
+        //usuarios = Gson().fromJson<List<Usuario>>(jsonPrueba, tipoUsurio)
+        for (d in usuario.dia) {
+            val diaEntero=d.id.split("-")
+            val diaEntero1=dia.split("-")
+            if ((diaEntero[0] == diaEntero1[0])&&diaEntero[1] == diaEntero1[1]) {
                 for(ej in d.ejercicios){
                     for(s in ej.series){
                         volumenDia+=s.peso*s.reps
