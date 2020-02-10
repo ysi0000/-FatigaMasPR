@@ -24,10 +24,13 @@
     <string name="formatodiamesao">%1$s-%2$s-%3$s</string>
     <string name="formatodiames">%1$s-%2$s</string>
     <string name="bt_anadirEjercicio">Añadir ejercicio</string>
-
+    <string name="anadirEjercicio">Pulsa para añadir ejericio</string>
     <string name="key_editpref_nombre">Nombre</string>
     <string name="key_editpref_peso">Peso</string>
     <string name="title_activity_actividad_opciones">ActividadOpciones</string>
     <string name="guardar">Guardar</string>
+    <string name="pregunta_1">¿Nivel de fatiga de empujes?</string>
+    <string name="pregunta_2">¿Nivel de fatiga de tiron?</string>
+    <string name="pregunta_3">¿Nivel de fatiga de pierna?</string>
 
 </resources>
