@@ -8,17 +8,14 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.example.tfg_fatigapr.clasesDatos.Ejercicio
-import com.example.tfg_fatigapr.clasesDatos.Serie
-import kotlinx.android.synthetic.main.nav_header_main.*
 
 
 class AnadirEjercicio : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
-    //lateinit var usuario: Usuario
     lateinit var dia:String
-    lateinit var nombreEjercicio:Button
-    lateinit var nomEjercicio:String
-    lateinit var nomModificacion:String
+    private lateinit var nombreEjercicio:Button
+    private lateinit var nomEjercicio:String
+    private lateinit var nomModificacion:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anadir_ejercicio)
@@ -32,7 +29,6 @@ class AnadirEjercicio : AppCompatActivity() {
     fun seleccionarEjercicio(view:View){
         val ejercicios =
             arrayOf("Banca","Sentadilla","Peso Muerto","Otro")
-        //Mejora de ociones
         val modificacionesBanca=arrayOf("Pines","2ct Parada","3ct Parada","Agarre Cerrado","Agarre Abierto","T&G","Sin modificaciones")
         val modificacionesMuerto=arrayOf("Deficit","2ctParada","3ct Parada","Sumo","Convencional","Rack","Semirigido","Bandas","Cadenas")
         val modificacionesSentadilla=arrayOf("2ct Parada","Pines","3ct Parada","Barra Alta","Barra Baja","Cadenas","Tempo")
@@ -67,26 +63,11 @@ class AnadirEjercicio : AppCompatActivity() {
 
     }
 
-    fun añadirEj(view: View){
+    fun anadirEj(view:View) {
         val db= RoomDataBase.getInstance(this)!!
-        val st=getString(R.string.key_editpref_nombre)
-        val str=sharedPreferences.getString(st,"")!!
-        val usuarioDao=db.usuariosDAO()
-        usuario = usuarioDao.seleccionarusuario(str)
-        val diaEncontrado=usuario.getDia(dia)
-        if(diaEncontrado!=null){
-            val dias=usuario.addEjercicio(dia, Ejercicio(0,nombreEjercicio.text.toString(),"",
-                mutableListOf(Serie(0,0,0,0)))
-            )
-
-        }else{
-            usuario.dia.add(
-                Dia(dia, mutableListOf(Ejercicio(0,nombreEjercicio.text.toString(),"",
-                mutableListOf(Serie(0,0,0,0)))))
-            )
-
-        }
-        usuarioDao.actualizarDias(usuario.nombre,usuario.dia)
+        val ejercicioDAO=db.ejercicioDAO()
+        val countejdia=ejercicioDAO.ejerciciosDia(dia)
+        ejercicioDAO.añadirEjercicio(Ejercicio(countejdia,nomEjercicio,nomModificacion,dia))
         finish()
     }
 }

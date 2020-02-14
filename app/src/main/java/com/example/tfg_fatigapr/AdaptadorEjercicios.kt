@@ -3,48 +3,47 @@ package com.example.tfg_fatigapr
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SimpleAdapter
 import android.widget.TextView
-import androidx.preference.PreferenceManager
+import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_fatigapr.clasesDatos.Ejercicio
+import com.example.tfg_fatigapr.clasesDatos.Serie
 
-public class AdaptadorEjercicios : RecyclerView.Adapter<AdaptadorEjercicios.MyViewHolder> {
-    private lateinit var recyclerView: RecyclerView
+
+class AdaptadorEjercicios(private val myDataset: List<Ejercicio>) :
+    RecyclerView.Adapter<AdaptadorEjercicios.MyViewHolder>() {
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val myDataset: List<Ejercicio>
-    private val diaActual:String
-    constructor(myDataset: List<Ejercicio>, diaActual: String) : super() {
-        this.myDataset = myDataset
-        this.diaActual=diaActual
-    }
-    class MyViewHolder: RecyclerView.ViewHolder
+
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
     {
-        var textView:TextView
-        var recyclerView:RecyclerView
+        var textView:TextView = view.findViewById(R.id.tv_ejercicio)
+        var recyclerView:RecyclerView = view.findViewById(R.id.recycler_series)
+        var anadirSerie:TextView=view.findViewById(R.id.tv_anadirSerie)
 
-        constructor(view: View) : super(view) {
-            textView=view.findViewById(R.id.tv_ejercicio)
-            recyclerView=view.findViewById(R.id.recycler_series)
-
-        }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.textView.text=myDataset[position].nombre
-        viewManager = LinearLayoutManager(holder.recyclerView.context)
-        viewAdapter = AdaptadorSeries(myDataset[position].series,diaActual,holder.textView.text.toString())
-        holder.textView.setOnClickListener {
-            val contextview=holder.textView.context
-            val db=RoomDataBase.getInstance(contextview)
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(contextview)
-            val st=contextview.getString(R.string.key_editpref_nombre)
-            val str=sharedPreferences.getString(st,"")!!
-            val usuario=db!!.usuariosDAO().seleccionarusuario(str)
-            usuario.addSerie(myDataset[position],diaActual)
-            db!!.usuariosDAO().actualizarDias(usuario.nombre,usuario.dia)
+        holder.textView.text=holder.textView.context.getString(R.string.nombre_ejercicio_modificaciones,
+                                        myDataset[position].nombre,myDataset[position].modificaciones)
+        val db=RoomDataBase.getInstance(holder.textView.context)
+        val seriesDAO=db!!.serieDAO()
+        val series=seriesDAO.seleccionarSeriesdeEjercicio(myDataset[position].dia,myDataset[position].id)
 
+
+
+
+        viewManager = LinearLayoutManager(holder.recyclerView.context)
+        viewAdapter = AdaptadorSeries(series)
+        holder.anadirSerie.setOnClickListener {
+            val dia=myDataset[position].dia
+            val idEjercicio=myDataset[position].id
+            val numeroSeries:Int=seriesDAO.numeroSeries(dia,idEjercicio)
+            seriesDAO.insertarSerie(Serie(numeroSeries,0,0,0,dia,idEjercicio))
+            notifyDataSetChanged()
         }
         holder.recyclerView.apply {
             setHasFixedSize(true)
@@ -54,6 +53,15 @@ public class AdaptadorEjercicios : RecyclerView.Adapter<AdaptadorEjercicios.MyVi
 
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
+
+            val swipeHandler = object : DeslizarParaBorrar(this.context) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val adapterR = adapter as AdaptadorSeries
+                    adapterR.removeAt(viewHolder.adapterPosition)
+                }
+            }
+            val itemTouchHelper = ItemTouchHelper(swipeHandler)
+            itemTouchHelper.attachToRecyclerView(this)
         }
     }
 

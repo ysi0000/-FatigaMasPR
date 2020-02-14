@@ -32,5 +32,6 @@
     <string name="pregunta_1">¿Nivel de fatiga de empujes?</string>
     <string name="pregunta_2">¿Nivel de fatiga de tiron?</string>
     <string name="pregunta_3">¿Nivel de fatiga de pierna?</string>
+    <string name="nombre_ejercicio_modificaciones">%1$s %2$s</string>
 
 </resources>

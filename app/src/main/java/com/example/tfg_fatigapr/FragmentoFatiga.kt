@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.gson.reflect.TypeToken
 
-public class FragmentoFatiga : Fragment() {
-    inline fun <reified T> genericType() = object : TypeToken<T>() {}.type
+class FragmentoFatiga : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

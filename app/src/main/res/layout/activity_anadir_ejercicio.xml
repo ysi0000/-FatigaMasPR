@@ -11,7 +11,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ejercicio"
+            android:text="@string/titulo_ejercicios"
             android:textSize="@dimen/tamaño_tv_aEjercicio"
             android:gravity="start"
             android:layout_margin="@dimen/activity_horizontal_margin"
@@ -21,14 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bt_nuevoEj"
-            android:onClick="seleccionarEjercicio"/>
+            android:onClick="seleccionarEjercicio"
+            android:text="@string/anadirEjercicio"/>
 
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bt_anadirEjercicio"
             android:layout_gravity="end"
-            android:onClick="añadirEj"
+            android:onClick="anadirEj"
     />
 
 </LinearLayout>

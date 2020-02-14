@@ -5,16 +5,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 
-@Entity(tableName = "tbEjercicios")
+@Entity(tableName = "tbEjercicios",primaryKeys = ["Id","Dia"])
 data class Ejercicio(
-    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "Id")
     var id:Int,
     @ColumnInfo(name="Nombre")
     val nombre:String,
     @ColumnInfo(name="Modificaciones")
     val modificaciones:String,
-    @ColumnInfo(name="Series")
-    @TypeConverters(ConversorSerie::class)
-    val series:MutableList<Serie>
+    @ColumnInfo(name="Dia")
+    val dia:String
 )
 

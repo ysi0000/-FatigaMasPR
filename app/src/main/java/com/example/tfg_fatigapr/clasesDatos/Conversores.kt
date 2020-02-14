@@ -7,7 +7,7 @@ import java.lang.reflect.Type
 import java.util.*
 
 
-class ConversorDia {
+/*class ConversorDia {
 
     var gson:Gson=Gson()
 
@@ -62,5 +62,5 @@ class ConversorSerie{
     fun someObjectListToString(someObjects: List<Serie?>?): String? {
         return gson.toJson(someObjects)
     }
-}
+}*/
 

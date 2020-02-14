@@ -17,4 +17,10 @@ interface DAOEjercicios {
     @Delete
     fun eliminarEjercicio(ejercicio: Ejercicio)
 
+    @Query("SELECT * FROM tbEjercicios WHERE Dia=:dia")
+    fun seleccionarEjercicios(dia:String):List<Ejercicio>
+
+    @Query("SELECT COUNT(*) FROM tbEjercicios WHERE Dia=:dia")
+    fun ejerciciosDia(dia:String):Int
+
 }

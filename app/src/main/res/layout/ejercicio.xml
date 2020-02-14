@@ -4,19 +4,32 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/LL_ejercicios">
-
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/tamaño_ejercicios"
-            android:layout_margin="8dp"
             android:gravity="center"
             android:textColor="@color/colorBlanco"
             android:background="@color/colorPrimary"
             android:id="@+id/tv_ejercicio"
+            android:layout_weight="1"
     />
-            <!--android:onClick="mostrarOcultarRecyclerSeries"!-->
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/tamaño_ejercicios"
+            android:textColor="@color/colorBlanco"
+            android:id="@+id/tv_anadirSerie"
+            android:layout_weight="8"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_playlist_add_black_24dp"
 
+            />
+</LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,32 +37,41 @@
             android:id="@+id/CL_ejercicio"
 
     >
+
         <TextView
+                android:id="@+id/tv_titulo_peso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/subtitulo_ejercicios_Peso"
-                android:id="@+id/tv_titulo_peso"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/subtitulo_ejercicios_Repeticiones"
                 android:id="@+id/tv_titulo_repeticiones"
-                app:layout_constraintEnd_toStartOf="@+id/tv_titulo_RPE"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toEndOf="@+id/tv_titulo_peso"
-                android:layout_marginStart="8dp"/>
-        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/subtitulo_ejercicios_RPE"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:id="@+id/tv_titulo_RPE"/>
+                android:text="@string/subtitulo_ejercicios_Repeticiones"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_titulo_RPE"
+                app:layout_constraintStart_toEndOf="@+id/tv_titulo_peso"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/tv_titulo_RPE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/subtitulo_ejercicios_RPE"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_series"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recycler_series">
-    </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
