@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +40,7 @@ class FragmentoEjercicios : Fragment() {
             val botonAdelante = view.findViewById<Button>(R.id.bt_diaPosterior)
             val botonAnadirEjercicio = view.findViewById<Button>(R.id.bt_anadirEjercicio)
             val diaActual = view.findViewById<TextView>(R.id.dia)
+            val selectorDia = view.findViewById<DatePicker>(R.id.selectorEjercicio)
                 if (context != null) {
                     db = RoomDataBase.getInstance(context!!)!!
                 }
@@ -62,6 +64,10 @@ class FragmentoEjercicios : Fragment() {
                         (c.get(Calendar.MONTH) + 1).toString(),
                         c.get(Calendar.YEAR).toString()
                     )//c.get(Calendar.DATE).toString()+"-"+(c.get(Calendar.MONTH)+1).toString()+"-"+c.get(Calendar.YEAR).toString()//dayeundiamas.date.toString()+"-"+dayeundiamas.month.toString()+"-"+dayeundiamas..toString()
+                    selectorDia.updateDate(
+                        c.get(Calendar.YEAR),
+                        (c.get(Calendar.MONTH) + 1),
+                        c.get(Calendar.DATE)
                     )
                     cargarDia(dia, view)
                 }
@@ -83,6 +89,10 @@ class FragmentoEjercicios : Fragment() {
                         (c.get(Calendar.MONTH) + 1).toString(),
                         c.get(Calendar.YEAR).toString()
                     )//dayeundiamas.date.toString()+"-"+dayeundiamas.month.toString()+"-"+dayeundiamas..toString()
+                    selectorDia.updateDate(
+                        c.get(Calendar.YEAR),
+                        (c.get(Calendar.MONTH) + 1),
+                        c.get(Calendar.DATE)
                     )
                     cargarDia(dia, view)
                 }
@@ -96,6 +106,22 @@ class FragmentoEjercicios : Fragment() {
                     startActivityForResult(intentAnadirEjercicio, 1)
                 }
 
+                diaActual.setOnClickListener {
+                    if (selectorDia.visibility == View.VISIBLE) {
+                        val dia = selectorDia.dayOfMonth
+                        val mes = selectorDia.month
+                        val anno = selectorDia.year
+                        (it as TextView).text = getString(
+                            R.string.formatodiamesao,
+                            dia.toString(),
+                            mes.toString(),
+                            anno.toString()
+                        )
+                        cargarDia(it, view)
+                        selectorDia.visibility = View.GONE
+
+                    } else
+                        selectorDia.visibility = View.VISIBLE
                 }
                 //endregion
                 val dia = view.findViewById<TextView>(R.id.dia)
