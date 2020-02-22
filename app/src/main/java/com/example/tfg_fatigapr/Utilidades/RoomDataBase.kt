@@ -1,10 +1,9 @@
-package com.example.tfg_fatigapr
+package com.example.tfg_fatigapr.Utilidades
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.example.tfg_fatigapr.DAOs.DAOEjercicios
 import com.example.tfg_fatigapr.DAOs.DAOSeries
 import com.example.tfg_fatigapr.clasesDatos.*
@@ -21,7 +20,8 @@ abstract class RoomDataBase: RoomDatabase() {
         private var INSTANCE: RoomDataBase? = null
 
         fun getInstance(context: Context): RoomDataBase? {
-            INSTANCE ?: synchronized(this) {
+            INSTANCE
+                ?: synchronized(this) {
                 INSTANCE = databaseBuilder(
                     context.applicationContext,
                     RoomDataBase::class.java,

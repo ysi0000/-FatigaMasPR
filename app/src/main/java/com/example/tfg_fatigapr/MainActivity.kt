@@ -13,6 +13,10 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.widget.TextView
 import androidx.preference.PreferenceManager
+import com.example.tfg_fatigapr.Fragmentos.FragmentoEjercicios
+import com.example.tfg_fatigapr.Fragmentos.FragmentoGraficas
+import com.example.tfg_fatigapr.Fragmentos.FragmentoOpcionesUsuario
+import com.example.tfg_fatigapr.Fragmentos.FragmentoPR
 import java.lang.Exception
 
 
@@ -27,10 +31,18 @@ try {
 
     val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
     val navView: NavigationView = findViewById(R.id.nav_view)
-    supportFragmentManager.beginTransaction().replace(
-        R.id.fragment_container,
-        FragmentoEjercicios()
-    ).commit()
+    try {
+        if (!supportFragmentManager.findFragmentById(R.id.fragment_container)!!.isAdded)
+            supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container,
+                FragmentoEjercicios()
+            ).commit()
+    }catch (ex:NullPointerException){
+        supportFragmentManager.beginTransaction().replace(
+            R.id.fragment_container,
+            FragmentoEjercicios()
+        ).commit()
+    }
     val toggle = ActionBarDrawerToggle(
         this,
         drawerLayout,
@@ -98,7 +110,6 @@ try {
                     ).commit()
                 }
                 R.id.nav_calendario -> {
-
                 }
                 R.id.nav_opciones -> {
                     supportFragmentManager.beginTransaction().replace(

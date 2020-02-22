@@ -1,4 +1,4 @@
-package com.example.tfg_fatigapr
+package com.example.tfg_fatigapr.Utilidades
 
 import android.app.AlertDialog
 import android.content.SharedPreferences
@@ -6,7 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.example.tfg_fatigapr.R
+import com.example.tfg_fatigapr.ViewModels.ViewModelEjercicios
+import com.example.tfg_fatigapr.ViewModels.ViewModelEjerciciosFactory
 import com.example.tfg_fatigapr.clasesDatos.Ejercicio
 
 
@@ -16,12 +20,16 @@ class AnadirEjercicio : AppCompatActivity() {
     private lateinit var nombreEjercicio:Button
     private lateinit var nomEjercicio:String
     private lateinit var nomModificacion:String
+    private lateinit var viewModel: ViewModelEjercicios
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anadir_ejercicio)
         nombreEjercicio=findViewById(R.id.bt_nuevoEj)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         dia=intent.getStringExtra("dia")!!
+        viewModel= ViewModelProvider(this,
+            ViewModelEjerciciosFactory(this)
+        ).get(ViewModelEjercicios::class.java)
 
     }
 
@@ -64,10 +72,7 @@ class AnadirEjercicio : AppCompatActivity() {
     }
 
     fun anadirEj(view:View) {
-        val db= RoomDataBase.getInstance(this)!!
-        val ejercicioDAO=db.ejercicioDAO()
-        val countejdia=ejercicioDAO.ejerciciosDia(dia)
-        ejercicioDAO.añadirEjercicio(Ejercicio(countejdia,nomEjercicio,nomModificacion,dia))
+        viewModel.insertarEjercicio(Ejercicio(viewModel.ejerciciosDia(dia),nomEjercicio,nomModificacion,dia))
         finish()
     }
 }

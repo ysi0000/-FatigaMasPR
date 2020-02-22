@@ -1,4 +1,4 @@
-package com.example.tfg_fatigapr
+package com.example.tfg_fatigapr.Fragmentos
 
 
 import android.graphics.Color
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tfg_fatigapr.R
+import com.example.tfg_fatigapr.Utilidades.RoomDataBase
 import com.example.tfg_fatigapr.clasesDatos.Serie
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -21,7 +23,8 @@ import kotlin.collections.ArrayList
 
 
 class FragmentoGraficas : Fragment() {
-    private lateinit var db:RoomDataBase
+    private lateinit var db: RoomDataBase
+    private lateinit var dias:ArrayList<String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,9 +41,17 @@ class FragmentoGraficas : Fragment() {
             val formatter = SimpleDateFormat("d-M-yyyy", Locale.FRANCE)
         val diaActual=formatter.format(date)
         if(context!=null) {
-            db= RoomDataBase.getInstance(context!!)!!
+            db= RoomDataBase.getInstance(
+                context!!
+            )!!
         }
-        val xVal= arrayListOf<String>(cambiarDia(diaActual,-2),cambiarDia(diaActual,-1),diaActual,cambiarDia(diaActual,1))
+        dias= arrayListOf()
+        for(i in 6 downTo 1){
+            dias.add(cambiarDia(diaActual,-i))
+        }
+        dias.add(diaActual)
+        dias.add(cambiarDia(diaActual,1))
+        val xVal= dias
         val lineDataSet = LineDataSet(dataValues(xVal), "Volumen")
         val datasets = ArrayList<ILineDataSet>()
         lineDataSet.color= Color.RED
@@ -61,14 +72,9 @@ class FragmentoGraficas : Fragment() {
     }
     private fun dataValues(xVal:ArrayList<String>): ArrayList<Entry> {
         val dataSet = ArrayList<Entry>()
-        val dia1=calcularVolumenDia(xVal[0])
-        val dia2=calcularVolumenDia(xVal[1])
-        val dia3=calcularVolumenDia(xVal[2])
-        val dia4=calcularVolumenDia(xVal[3])
-        if(dia1!=0f)dataSet.add(Entry(0f,dia1 ))
-        if(dia2!=0f) dataSet.add(Entry(1f, dia2))
-        if(dia3!=0f)dataSet.add(Entry(2f, dia3))
-        if(dia4!=0f)dataSet.add(Entry(3f, dia4))
+        for(i in 1..7){
+            dataSet.add(Entry(i.toFloat(),calcularVolumenDia(xVal[i]) ))
+        }
         return dataSet
     }
 

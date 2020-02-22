@@ -16,7 +16,7 @@
                 android:name=".ActividadOpciones"
                 android:label="@string/title_activity_actividad_opciones"
                 android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".AnadirEjercicio"></activity>
+        <activity android:name=".Utilidades.AnadirEjercicio"></activity>
         <activity android:name=".Graficas"></activity>
         <activity
                 android:name=".MainActivity"

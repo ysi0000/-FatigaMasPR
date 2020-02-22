@@ -1,4 +1,4 @@
-package com.example.tfg_fatigapr
+package com.example.tfg_fatigapr.Utilidades
 
 import android.content.Context
 import android.graphics.Canvas
@@ -10,11 +10,14 @@ import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tfg_fatigapr.R
 
 
 abstract class DeslizarParaBorrar(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
-    private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_24dp)
+    private val deleteIcon = ContextCompat.getDrawable(context,
+        R.drawable.ic_delete_white_24dp
+    )
     private val intrinsicWidth = deleteIcon!!.intrinsicWidth
     private val intrinsicHeight = deleteIcon!!.intrinsicHeight
     private val background = ColorDrawable()
