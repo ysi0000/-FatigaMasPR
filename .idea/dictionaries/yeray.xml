@@ -10,6 +10,7 @@
       <w>banca</w>
       <w>barra</w>
       <w>boton</w>
+      <w>cadera</w>
       <w>calcular</w>
       <w>cambiar</w>
       <w>cargar</w>
@@ -18,10 +19,12 @@
       <w>countejdia</w>
       <w>dataset</w>
       <w>datasets</w>
+      <w>dominantes</w>
       <w>ejercicio</w>
       <w>ejercicios</w>
       <w>elige</w>
       <w>eliminar</w>
+      <w>empuje</w>
       <w>fragmento</w>
       <w>graficas</w>
       <w>insertar</w>
@@ -30,11 +33,16 @@
       <w>muerto</w>
       <w>nombre</w>
       <w>numero</w>
+      <w>opciondominantes</w>
+      <w>opcionempuje</w>
+      <w>opciontiron</w>
       <w>parada</w>
+      <w>rodilla</w>
       <w>seleccionar</w>
       <w>sentadilla</w>
       <w>serie</w>
       <w>seriesde</w>
+      <w>tiron</w>
       <w>volumen</w>
     </words>
   </dictionary>

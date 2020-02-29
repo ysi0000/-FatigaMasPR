@@ -49,8 +49,11 @@ class ViewModelSeries(context: Context):ViewModel(){
         dia=diaActual
     }
 
-    fun seriesPorEjYDia(ejercicio:String, modificacion:String, dia:String): DatosPR {
-        return seriesDao.seriesPorEjYDia(ejercicio, modificacion, dia)[0]
+    fun seriesPorEjYDia(ejercicio:String, modificacion:String, dia:String): DatosPR? {
+        val series=seriesDao.seriesPorEjYDia(ejercicio, modificacion, dia)
+        return if(series.isNotEmpty())
+            series[0]
+        else null
     }
 
 }

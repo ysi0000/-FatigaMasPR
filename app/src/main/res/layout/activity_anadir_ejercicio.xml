@@ -1,35 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".Utilidades.AnadirEjercicio">
+        xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+    <LinearLayout
 
-    <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/titulo_ejercicios"
-            android:textSize="@dimen/tamaño_tv_aEjercicio"
-            android:gravity="start"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:textStyle="bold"
-    />
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bt_nuevoEj"
-            android:onClick="seleccionarEjercicio"
-            android:text="@string/anadirEjercicio"/>
+            android:orientation="vertical"
+            tools:context=".Utilidades.AnadirEjercicio">
 
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bt_anadirEjercicio"
-            android:layout_gravity="end"
-            android:onClick="anadirEj"
-    />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo_ejercicios"
+                android:textSize="@dimen/tamaño_tv_aEjercicio"
+                android:gravity="center"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:textStyle="bold"
+        />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_anadirEjercicio"
+                android:text="@string/anadirEjercicio"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textStyle="bold"/>
 
-</LinearLayout>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bt_nuevoEj"
+                android:onClick="seleccionarEjercicio"
+                android:text="@string/anadirEjercicio"
+                android:background="@color/LightSteelBlue"
+                />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_tipoBarra"
+                android:text="@string/anadirTipoBarra"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textStyle="bold"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bt_tipoBarra"
+                android:onClick="seleccionarTipoBarra"
+                android:text="@string/anadirTipoBarra"
+                android:background="@color/LightSteelBlue"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_cargaAcumulativa"
+                android:text="@string/anadirCargaAcumulativa"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textStyle="bold"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bt_cargaAcumulativa"
+                android:onClick="seleccionarCargaAcumulativa"
+                android:text="@string/anadirCargaAcumulativa"
+                android:background="@color/LightSteelBlue"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_recorrido"
+                android:text="@string/anadirRecorrido"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textStyle="bold"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bt_recorrido"
+                android:onClick="seleccionarRecorrido"
+                android:text="@string/anadirRecorrido"
+                android:background="@color/LightSteelBlue"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_equipamiento"
+                android:text="@string/anadirEquipamiento"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textStyle="bold"/>
+
+        <Button
+                android:id="@+id/bt_equipamiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/LightSteelBlue"
+                android:onClick="seleccionarEquipamiento"
+                android:text="@string/anadirEquipamiento" />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_tempo"
+                android:text="@string/anadirTempo"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bt_tempo"
+                android:onClick="seleccionarTempo"
+                android:text="@string/anadirTempo"
+                android:background="@color/LightSteelBlue"/>
+        <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_agarre"
+                android:text="@string/anadirAgarre"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/titulo_aplicacion"
+                android:textStyle="bold"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bt_agarre"
+                android:onClick="seleccionarAgarre"
+                android:text="@string/anadirAgarre"
+                android:background="@color/LightSteelBlue"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bt_anadirEjercicio"
+                android:layout_gravity="end"
+                android:onClick="anadirEj"/>
+
+
+    </LinearLayout>
+    </ScrollView>
+</layout>
