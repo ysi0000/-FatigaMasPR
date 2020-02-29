@@ -12,7 +12,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_opciones_usuario">Opciones Usuario</string>
     <string name="menu_graficas">Graficos</string>
-    <string name="menu_calendario">Calendario</string>
+    <string name="menu_RMEstimada">RM Estimada</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
@@ -25,6 +25,13 @@
     <string name="formatodiames">%1$s-%2$s</string>
     <string name="bt_anadirEjercicio">Añadir ejercicio</string>
     <string name="anadirEjercicio">Pulsa para añadir ejericio</string>
+    <string name="anadirAgarre">Pulsa para añadir tipo de agarre</string>
+    <string name="anadirRecorrido">Pulsa para modificar el recorrido</string>
+    <string name="anadirEquipamiento">Pulsa para añadir equipamiento</string>
+    <string name="anadirTipoBarra">Pulsa para modificar el tipo de barra</string>
+    <string name="anadirCargaAcumulativa">Pulsa para añadir una carga acumulativa</string>
+    <string name="anadirTempo">Pulsa para modificar tempo</string>
+
     <string name="key_editpref_nombre">Nombre</string>
     <string name="key_editpref_peso">Peso</string>
     <string name="title_activity_actividad_opciones">ActividadOpciones</string>
@@ -33,5 +40,6 @@
     <string name="pregunta_2">¿Nivel de fatiga de tiron?</string>
     <string name="pregunta_3">¿Nivel de fatiga de pierna?</string>
     <string name="nombre_ejercicio_modificaciones">%1$s %2$s</string>
+    <string name="rm_estimada">RM Estimada</string>
 
 </resources>

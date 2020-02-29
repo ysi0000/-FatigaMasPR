@@ -109,7 +109,11 @@ try {
                         FragmentoGraficas()
                     ).commit()
                 }
-                R.id.nav_calendario -> {
+                R.id.nav_RMEstimada -> {
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.fragment_container,
+                        FragmentoPR()
+                    ).commit()
                 }
                 R.id.nav_opciones -> {
                     supportFragmentManager.beginTransaction().replace(
