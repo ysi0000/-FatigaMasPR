@@ -10,4 +10,22 @@
             android:title="@string/key_editpref_peso"
 
             />
+    <ListPreference
+            android:defaultValue="@string/pref_Ejercicio_Banca"
+            android:entries="@array/pref_Banca"
+            android:entryValues="@array/pref_Banca"
+            android:key="@string/pref_Ejercicio_Banca"
+            android:title="@string/pref_Ejercicio_Banca" />
+    <ListPreference
+            android:defaultValue="@string/pref_Ejercicio_Sentadilla"
+            android:entries="@array/pref_Sentadilla"
+            android:entryValues="@array/pref_Sentadilla"
+            android:key="@string/pref_Ejercicio_Sentadilla"
+            android:title="@string/pref_Ejercicio_Sentadilla" />
+    <ListPreference
+            android:defaultValue="@string/key_editpref_Muerto"
+            android:entries="@array/pref_Muerto"
+            android:entryValues="@array/pref_Muerto"
+            android:key="@string/key_editpref_Muerto"
+            android:title="@string/key_editpref_Muerto" />
 </PreferenceScreen>

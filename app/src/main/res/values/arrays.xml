@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="pref_Banca">
+        <item>@string/pref_Ejercicio_Banca</item>
+        <item>@string/pref_Ejercicio_Banca2ct</item>
+        <item>@string/pref_Ejercicio_BancaTG</item>
+    </array>
+
+    <array name="pref_Sentadilla">
+        <item>@string/pref_Ejercicio_Sentadilla</item>
+        <item>@string/pref_Ejercicio_Sentadilla2ct</item>
+        <item>@string/pref_Ejercicio_SentadillaPin</item>
+    </array>
+
+    <array name="pref_Muerto">
+        <item>@string/pref_Ejercicio_PesoMuertoSumo</item>
+        <item>@string/pref_Ejercicio_PesoMuertoConv</item>
+        <item>@string/pref_Ejercicio_PesoMuertoSumo2ct</item>
+        <item>@string/pref_Ejercicio_PesoMuertoConv2ct</item>
+    </array>
+
+    <string-array name="seleccion_ejer">
+        <item>@string/ej_Press_Banca_principal</item>
+        <item>@string/ej_Sentadilla_principal</item>
+        <item>@string/ej_Peso_Muerto_principal</item>
+    </string-array>
+</resources>

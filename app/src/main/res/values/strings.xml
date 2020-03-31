@@ -34,6 +34,7 @@
 
     <string name="key_editpref_nombre">Nombre</string>
     <string name="key_editpref_peso">Peso</string>
+    <string name="key_editpref_Muerto">Peso Muerto</string>
     <string name="title_activity_actividad_opciones">ActividadOpciones</string>
     <string name="guardar">Guardar</string>
     <string name="pregunta_1">¿Nivel de fatiga de empujes?</string>
@@ -41,5 +42,22 @@
     <string name="pregunta_3">¿Nivel de fatiga de pierna?</string>
     <string name="nombre_ejercicio_modificaciones">%1$s %2$s</string>
     <string name="rm_estimada">RM Estimada</string>
+
+    <string name="pref_Ejercicio_Banca">Press Banca</string>
+    <string name="pref_Ejercicio_Banca2ct">Press Banca 2ct Parada</string>
+    <string name="pref_Ejercicio_BancaTG">TG Press Banca</string>
+
+    <string name="pref_Ejercicio_Sentadilla">Sentadilla</string>
+    <string name="pref_Ejercicio_Sentadilla2ct">Sentadilla 2ct Parada</string>
+    <string name="pref_Ejercicio_SentadillaPin">Sentadilla Pines</string>
+
+    <string name="pref_Ejercicio_PesoMuertoConv">Peso Muerto Convecional</string>
+    <string name="pref_Ejercicio_PesoMuertoSumo">Peso Muerto Sumo</string>
+    <string name="pref_Ejercicio_PesoMuertoSumo2ct">Peso Muerto Sumo 2ct Parada</string>
+    <string name="pref_Ejercicio_PesoMuertoConv2ct">Peso Muerto Sumo 2ct Parada</string>
+
+    <string name="ej_Press_Banca_principal">Ejercicio Press Banca Principal</string>
+    <string name="ej_Peso_Muerto_principal">Ejercicio Peso Muerto Principal</string>
+    <string name="ej_Sentadilla_principal">Ejercicio Sentadilla Principal</string>
 
 </resources>

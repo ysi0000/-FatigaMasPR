@@ -36,7 +36,7 @@ interface DAOSeries{
     @Query("UPDATE tbSeries SET Reps=:reps WHERE Dia=:dia AND IdEjercicio=:idEjercicio AND Id=:Id")
     fun actualizarReps(reps:Int,dia: String,idEjercicio: Int,Id:Int)
 
-    @Query("SELECT tbSeries.Reps,tbSeries.Peso,tbSeries.RPE FROM tbSeries JOIN tbEjercicios ON tbSeries.Dia=tbEjercicios.Dia WHERE tbSeries.Dia=:dia AND Nombre=:ejercicio AND Modificaciones=:modificacion ORDER BY Reps ASC,Peso DESC,RPE DESC" )
+    @Query("SELECT tbSeries.Reps,tbSeries.Peso,tbSeries.RPE FROM tbSeries JOIN tbEjercicios ON tbSeries.Dia=tbEjercicios.Dia WHERE tbSeries.Dia=:dia AND tbEjercicios.Nombre=:ejercicio AND tbEjercicios.Modificaciones=:modificacion ORDER BY Reps ASC,Peso DESC,RPE DESC" )
     fun seriesPorEjYDia(ejercicio:String,modificacion:String,dia:String):List<DatosPR>
 
 }

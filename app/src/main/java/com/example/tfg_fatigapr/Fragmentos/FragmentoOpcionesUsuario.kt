@@ -24,7 +24,13 @@ class FragmentoOpcionesUsuario : PreferenceFragmentCompat(), OnSharedPreferenceC
         val prefScreen: PreferenceScreen = preferenceScreen
         val count: Int = prefScreen.preferenceCount
         db= RoomDataBase.getInstance(context!!)!!
-
+        // Go through all of the preferences, and set up their preference summary.
+        // Go through all of the preferences, and set up their preference summary.
+        for (i in 0 until count) {
+            val p = prefScreen.getPreference(i)
+            val value = sharedPreferences.getString(p.key, "")
+            setPreferenceSummary(p, value!!)
+        }
     }
 
     private fun setPreferenceSummary(
@@ -35,16 +41,11 @@ class FragmentoOpcionesUsuario : PreferenceFragmentCompat(), OnSharedPreferenceC
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        //val preference = findPreference(key)
-        //if (null != preference) { // Updates the summary for the preference
-            /*val value = sharedPreferences.getString(preference.key as String, "")
-            when(preference.key){
-                "Nombre"->usuariosDao.actualizarNombre(value!!, usuario.nombre)
-                else->usuariosDao.actualizarPeso(value!!.toInt(), usuario.nombre)
-            }
-
-            setPreferenceSummary(preference, value)*/
-        //}
+        val preference:Preference? = findPreference(key)
+        if (null != preference) { // Updates the summary for the preference
+            val value = sharedPreferences.getString(preference.key as String, "")!!
+            setPreferenceSummary(preference, value)
+        }
     }
 
 
