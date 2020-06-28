@@ -77,7 +77,7 @@ class AdaptadorEjercicios (viewModelSerie: ViewModelSeries):
      * @author Yeray Sardón Ibáñez
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.ejercicio, parent, false) as View
         return MyViewHolder(
