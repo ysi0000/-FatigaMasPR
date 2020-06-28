@@ -1,14 +1,18 @@
 package com.example.tfg_fatigapr.ViewModels
 
-import android.content.Context
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class ViewModelEjerciciosFactory(val context: Context) :ViewModelProvider.Factory{
+/**
+ * Patron fabrica para el viewModel dado que por defecto el viewmodel no lleva un parametro,
+ * con el fin de añadir la aplicacion al viewmodel necesaria para el contexto de la aplicacion
+ */
+class ViewModelEjerciciosFactory(val application: Application) :ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ViewModelEjercicios::class.java)) {
             return ViewModelEjercicios(
-                context
+                application
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

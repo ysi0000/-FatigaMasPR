@@ -25,6 +25,10 @@ import kotlin.collections.ArrayList
 class FragmentoGraficas : Fragment() {
     private lateinit var db: RoomDataBase
     private lateinit var dias:ArrayList<String>
+    /**
+     * Esta funcion se llama cada vez que se crea el fragmento
+     * En el se une el layout con la logica del fragmento
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +38,10 @@ class FragmentoGraficas : Fragment() {
 
     }
 
+    /**
+     * Esta funcion se llama cuando el fragmento se ha creado en ella se instancia el grafico y
+     * variables necesarias para rellenar el grafico
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val lineChartView = view.findViewById<LineChart>(R.id.linechart)
         lineChartView.description.isEnabled=false
@@ -70,6 +78,10 @@ class FragmentoGraficas : Fragment() {
         val yAxis=lineChartView.axisLeft
         yAxis.granularity=200f
     }
+
+    /**
+     * En esta funcion se inicializan los valores de la grafica
+     */
     private fun dataValues(xVal:ArrayList<String>): ArrayList<Entry> {
         val dataSet = ArrayList<Entry>()
         for(i in 1..7){
@@ -78,6 +90,10 @@ class FragmentoGraficas : Fragment() {
         return dataSet
     }
 
+    /**
+     * Esta es la funcion que se usa para rotar entre los dias anteriores
+     * llama a la funcion calcularVolumen cada iteraccion
+     */
     private fun cambiarDia(dia:String, offset:Int):String{
         val dateFormat = SimpleDateFormat("d-M-yyyy", Locale.FRANCE)
         val d=dateFormat.parse(dia)
@@ -86,6 +102,10 @@ class FragmentoGraficas : Fragment() {
         c.add(Calendar.DATE,offset)
         return getString(R.string.formatodiamesao,c.get(Calendar.DATE).toString(),(c.get(Calendar.MONTH)+1).toString(),c.get(Calendar.YEAR).toString())
     }
+
+    /**
+     * Esta funcion calcula el volumen en un dia especifico
+     */
     private fun calcularVolumenDia(dia:String):Float{
         var volumenDia=0f
         val series=db.serieDAO().seleccionarSeriesDia(dia)

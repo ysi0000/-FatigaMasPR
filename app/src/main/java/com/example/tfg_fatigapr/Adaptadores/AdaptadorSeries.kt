@@ -11,11 +11,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_fatigapr.R
 import com.example.tfg_fatigapr.ViewModels.ViewModelSeries
 import com.example.tfg_fatigapr.clasesDatos.Serie
-
+/**
+ * Clase para controlar el RecyclerView de las series
+ *
+ * @property ViewModelSeries ViewModel de las Series para controlar el RecyclerView anidado
+ * @author Yeray Sardon Ibañez
+ *
+ */
 class AdaptadorSeries(viewModelSerie: ViewModelSeries) :
     RecyclerView.Adapter<AdaptadorSeries.MyViewHolder>() {
     private var viewModel=viewModelSerie
     private var myDataset: MutableList<Serie> = viewModelSerie.series
+
+    /**
+     * Clase que alberga las views del interior del RecyclerView
+     */
+
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
     {
         var peso:EditText = view.findViewById(R.id.edittext_peso)
@@ -24,7 +35,10 @@ class AdaptadorSeries(viewModelSerie: ViewModelSeries) :
         var id:TextView = view.findViewById(R.id.id_serie)
 
     }
-
+    /**
+     *Clase que para cada elemento del RecyclerView lo actualiza con la informacion correspondiente
+     *
+     */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val serieActual=myDataset[position]
         holder.id.text=(position+1).toString()
@@ -63,7 +77,11 @@ class AdaptadorSeries(viewModelSerie: ViewModelSeries) :
 
         })
     }
-
+    /**
+     * Este metodo crea un MyViewHolder inicializandolo a la vista usada por RecyclerView
+     *
+     * @author Yeray Sardón Ibáñez
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.series, parent, false) as View
@@ -71,10 +89,19 @@ class AdaptadorSeries(viewModelSerie: ViewModelSeries) :
             view
         )
     }
+    /**
+     * Este metodo calcula el numero de items y actualiza las views para que haya tantas como series
+     *
+     * @author Yeray Sardón Ibáñez
+     */
     override fun getItemCount(): Int {
         return myDataset.size
     }
-
+    /**
+     * Este metodo permite borrar una serie
+     *
+     * @author Yeray Sardón Ibáñez
+     */
     fun removeAt(position: Int) {
         viewModel.borrarSerie(myDataset[position])
         myDataset.removeAt(position)

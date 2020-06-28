@@ -29,6 +29,11 @@ class FragmentoEjercicios : Fragment() {
     private lateinit var viewModelSerie: ViewModelSeries
     private lateinit var binding:ContentMainBinding
 
+    /**
+     * Esta funcion se llama cada vez que se crea el fragmento
+     * En ella se instancian todas las variables y se inicializan los listeners de los botones
+     * En el se une el layout con la logica del fragmento
+     */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +56,10 @@ class FragmentoEjercicios : Fragment() {
         return binding.root
     }
 
+    /**
+     * Esta funcion se llama cuando el fragmento se ha creado en ella se instancia el adaptador del
+     * RecyclerView
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewAdapter =
             AdaptadorEjercicios(
@@ -66,6 +75,9 @@ class FragmentoEjercicios : Fragment() {
         cargarDia()
     }
 
+    /**
+     * En esta funcion se modifica el dia del calendario
+     */
     private fun modificarDia(operacion:Int){
         val c=viewModel.modificarDia(operacion)
         actualizardia()
@@ -78,6 +90,10 @@ class FragmentoEjercicios : Fragment() {
         cargarDia()
     }
 
+    /**
+     * En esta funcion se llama a la actividad de añadir ejercicio y se espera el
+     * resultado que devuelve
+     */
 
     private fun anadirEjericio(){
         val intentAnadirEjercicio = Intent(context, AnadirEjercicio::class.java)
@@ -86,6 +102,9 @@ class FragmentoEjercicios : Fragment() {
         startActivityForResult(intentAnadirEjercicio, 1)
     }
 
+    /**
+     * En esta funcion se encarga de alternar la vista del calendario de visible a invisible
+     */
     private fun diaActual(){
         if (binding.selectorEjercicio.visibility == View.VISIBLE) {
             viewModel.actualizarDiaDP(getString(
@@ -105,6 +124,9 @@ class FragmentoEjercicios : Fragment() {
     private fun actualizardia() {
         binding.dia.text = viewModel.dia
     }
+    /**
+     * En esta funcion se actualiza el dia mes y año seleccionado en el calendario
+     */
 
     private fun cargarDia(){
         viewAdapter.setItems(viewModel.seleccionarEjercicios(binding.dia.text.toString()))
@@ -112,13 +134,17 @@ class FragmentoEjercicios : Fragment() {
 
     private fun actualizarSelector(year:Int, mes:Int, dia:Int){
         binding.selectorEjercicio.updateDate(year,mes,dia)
+
     }
+    /**
+     * En esta actividad se captura lo que devuelve de la actividad AñadirEjercicio
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         try {
             super.onActivityResult(requestCode, resultCode, data)
 
             if (requestCode == 1  && resultCode  == 0) {
-                cargarDia()
+                viewModel.seleccionarEjerciciosDia()
 
             }
         } catch (ex:Exception) {

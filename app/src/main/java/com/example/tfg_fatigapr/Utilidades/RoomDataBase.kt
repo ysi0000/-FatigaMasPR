@@ -8,6 +8,11 @@ import com.example.tfg_fatigapr.DAOs.DAOEjercicios
 import com.example.tfg_fatigapr.DAOs.DAOSeries
 import com.example.tfg_fatigapr.clasesDatos.*
 
+/**
+ * Clase que crea un singleton sincronizado para que la llamada a la base de datos sea unica,
+ * es decir que no haya bases de datos con estados inconcluentes.
+ * Solo existe una base de datos y se devuelve la misma instancia siempre
+ */
 @Database(entities = [Ejercicio::class, Serie::class],version=1)
 abstract class RoomDataBase: RoomDatabase() {
 

@@ -6,7 +6,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.tfg_fatigapr.clasesDatos.Serie
 import com.example.tfg_fatigapr.Fragmentos.DatosPR
-
+/**
+ * Interfaz para realizar operaciones con la base de datos
+ */
 @Dao
 interface DAOSeries{
     @Query("SELECT * FROM tbSeries")

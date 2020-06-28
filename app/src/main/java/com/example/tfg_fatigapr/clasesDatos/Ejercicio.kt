@@ -2,10 +2,13 @@ package com.example.tfg_fatigapr.clasesDatos
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 
-@Entity(tableName = "tbEjercicios",primaryKeys = ["Id","Dia"])
+
+/**
+ * Esta clase se utilza para albergar la informacion de los ejercicios
+ * con anotaciones para el uso de Room
+ */
+@Entity(tableName = "tbEjercicios",primaryKeys = ["Id","Dia","Nombre_Usuario"])
 data class Ejercicio(
     @ColumnInfo(name = "Id")
     var id:Int,
@@ -14,6 +17,8 @@ data class Ejercicio(
     @ColumnInfo(name="Modificaciones")
     val modificaciones:String,
     @ColumnInfo(name="Dia")
-    val dia:String
+    val dia:String,
+    @ColumnInfo(name="Nombre_Usuario")
+    val nombreUsuario:String
 )
 

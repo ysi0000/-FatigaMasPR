@@ -28,7 +28,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+/**
+ * Fragmento de la opcion de RM estimada
+ */
 class FragmentoPR :Fragment() {
 
     private lateinit var viewModelEjercicios: ViewModelEjercicios
@@ -56,6 +58,12 @@ class FragmentoPR :Fragment() {
         ).get(ViewModelSeries::class.java)
         return inflater.inflate(R.layout.fragmento_pr, container, false)
     }
+
+    /**
+     * Funcion que se llama cuando se crea la actividad
+     * Se inicializa tanto la lista para calcular las PR
+     * como todos los dias que se vayan a hacer en la grafica
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         inicializarLista()
         val lineChartView = view.findViewById<LineChart>(R.id.lineChartPR)
@@ -101,12 +109,20 @@ class FragmentoPR :Fragment() {
         }
 
     }
+
+    /**
+     * Funcion que inicializa la lista
+     */
     private fun inicializarLista(){
         listaPREstimadas= listOf(listOf(65,88,85,82,80,77,75,72,69,67,64),listOf(70,89,86,84,81,79,76,74,71,68,65),
             listOf(75,91,88,85,82,80,77,75,72,69,67),listOf(80,92,89,86,84,81,79,76,74,71,68),
             listOf(85,94,91,88,85,82,80,77,75,72,69),listOf(90,96,92,89,86,84,81,79,76,74,71),
             listOf(95,98,94,91,88,85,82,80,77,75,72),listOf(100,100,96,92,89,86,84,81,79,76,74))
     }
+
+    /**
+     * Funcion que recorre los 30 dias para calcular la pr del dia
+     */
     private fun dataValues(xVal:ArrayList<String>): ArrayList<Entry> {
         val dataSet = ArrayList<Entry>()
         for(i in 1..26){
@@ -134,6 +150,10 @@ class FragmentoPR :Fragment() {
             round(serie.Peso/(elegirPorcentaje(serie.RPE,serie.Reps)/100f),2.5f)
         else 0f
     }
+
+    /**
+     * Devuelve el dia siguiente al pedido
+     */
     private fun cambiarDia(dia:String, offset:Int):String{
         val dateFormat = SimpleDateFormat("d-M-yyyy", Locale.FRANCE)
         val d=dateFormat.parse(dia)
@@ -143,6 +163,11 @@ class FragmentoPR :Fragment() {
         return getString(R.string.formatodiamesao,c.get(Calendar.DATE).toString(),(c.get(Calendar.MONTH)+1).toString(),c.get(
             Calendar.YEAR).toString())
     }
+
+    /**
+     *
+     * Esta funcion escoje el porcentaje en la lista dependiendo de las repeticiones y RPE
+     */
     private fun elegirPorcentaje(RPE:Int,Reps:Int): Int {
         return when(RPE){
             10->listaPREstimadas[7][Reps]
@@ -151,10 +176,17 @@ class FragmentoPR :Fragment() {
             else->listaPREstimadas[1][Reps]
         }
     }
+
+    /**
+     * Redondea un numero a un valor insertado
+     */
     private fun round(i: Float, v: Float): Float {
         return ((Math.round(i / v) * v))
     }
 
+    /**
+     * Elige la modificacion de banca elegida en opciones
+     */
     private fun modificacionBanca():String{
         return when(sharedPreferences.getString(getString(R.string.pref_Ejercicio_Banca),"Error")){
             "Press Banca 2ct Parada"->"2ct Parada "
@@ -162,6 +194,9 @@ class FragmentoPR :Fragment() {
             else->""
         }
     }
+    /**
+     * Elige la modificacion de sentadilla elegida en opciones
+     */
     private fun modificacionSentadilla():String{
         return when(sharedPreferences.getString(getString(R.string.pref_Ejercicio_Sentadilla),"Error")){
             "Sentadilla 2ct Parada"->"2ct Parada "
@@ -169,6 +204,9 @@ class FragmentoPR :Fragment() {
             else->""
         }
     }
+    /**
+     * Elige la modificacion de peso muerto elegida en opciones
+     */
     private fun modificacionMuerto():String{
         return when(sharedPreferences.getString(getString(R.string.key_editpref_Muerto),"Error")){
             "Peso Muerto Sumo 2ct Parada"->"2ct Parada "
@@ -176,6 +214,10 @@ class FragmentoPR :Fragment() {
             else->""
         }
     }
+
+    /**
+     * Construye la grafica y le da el diseño que se desea
+     */
     private fun construirGrafica(lineChartView:LineChart){
         xVal= dias
         val lineDataSet = LineDataSet(dataValues(xVal), "Volumen")
@@ -198,6 +240,9 @@ class FragmentoPR :Fragment() {
     }
     }
 
+/**
+ * Clase de datos para guardar los datos y poder calcular de manera mas rapida
+ */
 class DatosPR(
     var Reps:Int,
     var Peso:Int,
