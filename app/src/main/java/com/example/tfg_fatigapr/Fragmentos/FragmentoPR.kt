@@ -47,7 +47,7 @@ class FragmentoPR :Fragment() {
         viewModelEjercicios = ViewModelProvider(
             this,
             ViewModelEjerciciosFactory(
-                context!!
+                activity!!.application
             )
         ).get(ViewModelEjercicios::class.java)
         viewModelSerie = ViewModelProvider(

@@ -1,71 +1,126 @@
 package com.example.tfg_fatigapr
 
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import android.widget.TextView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.preference.PreferenceManager
 import com.example.tfg_fatigapr.Fragmentos.FragmentoEjercicios
 import com.example.tfg_fatigapr.Fragmentos.FragmentoGraficas
 import com.example.tfg_fatigapr.Fragmentos.FragmentoOpcionesUsuario
 import com.example.tfg_fatigapr.Fragmentos.FragmentoPR
-import java.lang.Exception
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.AuthUI.IdpConfig.*
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    private lateinit var mFireBaseAuth:FirebaseAuth
+    private lateinit var mAuthStateListener:FirebaseAuth.AuthStateListener
+    private val RC_SIGN_IN=1
     override fun onCreate(savedInstanceState: Bundle?) {
-try {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    val toolbar: Toolbar = findViewById(R.id.toolbar)
-    setSupportActionBar(toolbar)
+        super.onCreate(savedInstanceState)
+        mFireBaseAuth=FirebaseAuth.getInstance()
+        val providers = arrayListOf(
+            EmailBuilder().build(),
+            GoogleBuilder().build())
+        mAuthStateListener= FirebaseAuth.AuthStateListener { firebaseAuth ->
+            val user=firebaseAuth.currentUser
+            if(user!=null){
+                onSingedInInitialize(user.displayName!!)
+            }else{
+               //onSignedOutCleanUp()
+                startActivityForResult(
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder().setIsSmartLockEnabled(false)
+                        .setAvailableProviders(providers)
+                        .setTheme(R.style.Login).setLogo(R.mipmap.app_ic)
+                        .build(), RC_SIGN_IN)
+            }
+        }
 
-    val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-    val navView: NavigationView = findViewById(R.id.nav_view)
-    try {
-        if (!supportFragmentManager.findFragmentById(R.id.fragment_container)!!.isAdded)
+
+    }
+
+    private fun onSingedInInitialize(username:String){
+        setContentView(R.layout.activity_main)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        try {
+            val fragmentoNoAnadido=supportFragmentManager.findFragmentById(R.id.fragment_container)!!.isAdded
+            if(fragmentoNoAnadido)
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container,
+                    FragmentoEjercicios()
+                ).commit()
+        }catch (ex:Exception){
             supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container,
                 FragmentoEjercicios()
             ).commit()
-    }catch (ex:NullPointerException){
-        supportFragmentManager.beginTransaction().replace(
-            R.id.fragment_container,
-            FragmentoEjercicios()
-        ).commit()
-    }
-    val toggle = ActionBarDrawerToggle(
-        this,
-        drawerLayout,
-        toolbar,
-        R.string.navigation_drawer_open,
-        R.string.navigation_drawer_close
-    )
-    drawerLayout.addDrawerListener(toggle)
-    toggle.syncState()
-    navView.setNavigationItemSelectedListener(this)
-    val navHeader = navView.getHeaderView(0)
-    val usuario = navHeader.findViewById<TextView>(R.id.nombreusuario)
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-    val st = getString(R.string.key_editpref_nombre)
-    val str = sharedPreferences.getString(st, "")!!
-    usuario.text = str
-}catch (ex:Exception){
-    Log.d("Hola",ex.message)
-}
+        }
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        navView.setNavigationItemSelectedListener(this)
+        val navHeader = navView.getHeaderView(0)
+        val usuario = navHeader.findViewById<TextView>(R.id.nombreusuario)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val st = getString(R.string.key_editpref_nombre)
+        val str = sharedPreferences.getString(st, username)!!
+        usuario.text = str
 
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == RC_SIGN_IN && resultCode== RESULT_CANCELED){
+            finish()
 
         }
+    }
 
+    fun onSignedOutCleanUp(){
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        navView.setNavigationItemSelectedListener(this)
+        val navHeader = navView.getHeaderView(0)
+        val usuario = navHeader.findViewById<TextView>(R.id.nombreusuario)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val st = getString(R.string.key_editpref_nombre)
+        val str = sharedPreferences.getString(st, "")!!
+        usuario.text = str
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mFireBaseAuth.addAuthStateListener(mAuthStateListener)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mFireBaseAuth.removeAuthStateListener(mAuthStateListener)
+
+    }
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -73,6 +128,7 @@ try {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+
         }
     }
 
@@ -120,6 +176,9 @@ try {
                         R.id.fragment_container,
                         FragmentoOpcionesUsuario()
                     ).commit()
+                }
+                R.id.nav_signOut->{
+                    AuthUI.getInstance().signOut(this)
                 }
             }
             val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

@@ -38,7 +38,7 @@ class FragmentoEjercicios : Fragment() {
             R.layout.content_main,container, false)
         viewModel=ViewModelProvider(this,
             ViewModelEjerciciosFactory(
-                context!!
+                activity!!.application
             )
         ).get(ViewModelEjercicios::class.java)
         viewModelSerie=ViewModelProvider(this,

@@ -21,15 +21,15 @@ class RepositorioEjercicios(application: Application){
         ejerciciosDao.eliminarEjercicio(ejercicio)
     }
 
-    fun seleccionarEjercicios(): List<Ejercicio> {
-        return ejerciciosDao.seleccionarEjercicios()
+    fun seleccionarEjercicios(nombreUsuario:String): List<Ejercicio> {
+        return ejerciciosDao.seleccionarEjercicios(nombreUsuario)
     }
 
-    fun seleccionarEjercicios(dia:String): List<Ejercicio> {
-        return ejerciciosDao.seleccionarEjercicios(dia)
+    fun seleccionarEjercicios(dia:String,nombreUsuario:String): List<Ejercicio> {
+        return ejerciciosDao.seleccionarEjercicios(dia,nombreUsuario)
     }
 
-    fun ejerciciosDia(dia:String): Int {
-        return ejerciciosDao.ejerciciosDia(dia)
+    fun ejerciciosDia(dia:String,nombreUsuario:String): Int {
+        return ejerciciosDao.ejerciciosDia(dia,nombreUsuario)
     }
 }

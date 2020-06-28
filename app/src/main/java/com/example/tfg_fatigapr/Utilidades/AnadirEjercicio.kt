@@ -14,10 +14,12 @@ import com.example.tfg_fatigapr.ViewModels.ViewModelEjercicios
 import com.example.tfg_fatigapr.ViewModels.ViewModelEjerciciosFactory
 import com.example.tfg_fatigapr.clasesDatos.Ejercicio
 import com.example.tfg_fatigapr.databinding.ActivityAnadirEjercicioBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class AnadirEjercicio : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var mFireBaseAuth: FirebaseAuth
     lateinit var dia:String
     private lateinit var binding:ActivityAnadirEjercicioBinding
     private var nomEjercicio:String=""
@@ -40,6 +42,7 @@ class AnadirEjercicio : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mFireBaseAuth=FirebaseAuth.getInstance()
         setContentView(R.layout.activity_anadir_ejercicio)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         dia=intent.getStringExtra("dia")!!
@@ -186,10 +189,12 @@ class AnadirEjercicio : AppCompatActivity() {
             if(nomEjercicio!="") {
                 viewModel.insertarEjercicio(
                     Ejercicio(
-                        viewModel.ejerciciosDia(dia),
+                        viewModel.ejerciciosDia(),
                         nomEjercicio,
                         nombreModificacion(),
-                        dia
+                        dia,
+                        sharedPreferences.getString(getString(R.string.key_editpref_nombre),
+                            mFireBaseAuth.currentUser!!.displayName)!!
                     )
                 )
                 finish()

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "315263269361",
+    "firebase_url": "https://fatigamaspr.firebaseio.com",
+    "project_id": "fatigamaspr",
+    "storage_bucket": "fatigamaspr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315263269361:android:a7b99e13e084d4eebc2c50",
+        "android_client_info": {
+          "package_name": "com.example.tfg_fatigapr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315263269361-ie7rikj3c7h992cgn4qu3cvoekmjrk2c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tfg_fatigapr",
+            "certificate_hash": "cd897043b7e5a87f0717f03312b5bb568dd9aa7c"
+          }
+        },
+        {
+          "client_id": "315263269361-lttkrsqcom28iejd5gdh5cbp2nqlihpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzizyqAHCDm-uU4zgTT0RR2SajTca_55k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315263269361-lttkrsqcom28iejd5gdh5cbp2nqlihpa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

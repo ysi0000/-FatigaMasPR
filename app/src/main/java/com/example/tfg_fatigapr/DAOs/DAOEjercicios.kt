@@ -11,6 +11,8 @@ import com.example.tfg_fatigapr.clasesDatos.Ejercicio
 interface DAOEjercicios {
     @Query("SELECT * FROM tbEjercicios")
     fun seleccionarEjercicios():List<Ejercicio>
+    @Query("SELECT * FROM tbEjercicios WHERE Nombre_Usuario=:nombreUsuario")
+    fun seleccionarEjercicios(nombreUsuario: String):List<Ejercicio>
 
     @Insert
     fun añadirEjercicio(ejercicio: Ejercicio)
@@ -20,8 +22,12 @@ interface DAOEjercicios {
 
     @Query("SELECT * FROM tbEjercicios WHERE Dia=:dia")
     fun seleccionarEjercicios(dia:String):List<Ejercicio>
+    @Query("SELECT * FROM tbEjercicios WHERE Dia=:dia AND Nombre_Usuario=:nombreUsuario")
+    fun seleccionarEjercicios(dia:String,nombreUsuario: String):List<Ejercicio>
 
     @Query("SELECT COUNT(*) FROM tbEjercicios WHERE Dia=:dia")
     fun ejerciciosDia(dia:String):Int
+    @Query("SELECT COUNT(*) FROM tbEjercicios WHERE Dia=:dia AND Nombre_Usuario=:nombreUsuario")
+    fun ejerciciosDia(dia:String,nombreUsuario: String):Int
 
 }
