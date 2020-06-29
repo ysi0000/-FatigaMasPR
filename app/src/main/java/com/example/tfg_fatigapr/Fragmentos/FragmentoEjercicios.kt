@@ -21,14 +21,17 @@ import com.example.tfg_fatigapr.ViewModels.ViewModelSeries
 import com.example.tfg_fatigapr.ViewModels.ViewModelSeriesFactory
 import java.util.*
 
-
+/**
+ * Fragmento principal en el que se realiza la insercion de ejercicios
+ *
+ * @author Yeray Sardon Ibañez
+ */
 class FragmentoEjercicios : Fragment() {
     private lateinit var viewAdapter: AdaptadorEjercicios
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var viewModel: ViewModelEjercicios
     private lateinit var viewModelSerie: ViewModelSeries
     private lateinit var binding:ContentMainBinding
-
     /**
      * Esta funcion se llama cada vez que se crea el fragmento
      * En ella se instancian todas las variables y se inicializan los listeners de los botones
@@ -53,6 +56,14 @@ class FragmentoEjercicios : Fragment() {
         binding.btDiaAnterior.setOnClickListener{modificarDia(-1)}
         binding.btAnadirEjercicio.setOnClickListener { anadirEjericio()}
         binding.dia.setOnClickListener{diaActual()}
+
+        viewModel.dia.observe(this, androidx.lifecycle.Observer {nuevoDia->
+            binding.dia.text=nuevoDia
+            viewModel.seleccionarEjerciciosDia()
+        })
+        viewModel.ejercicios.observe(this, androidx.lifecycle.Observer {nuevaListaEjercicios->
+            viewAdapter.setItems(nuevaListaEjercicios)
+        })
         return binding.root
     }
 
@@ -71,8 +82,6 @@ class FragmentoEjercicios : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
-        actualizardia()
-        cargarDia()
     }
 
     /**
@@ -80,14 +89,12 @@ class FragmentoEjercicios : Fragment() {
      */
     private fun modificarDia(operacion:Int){
         val c=viewModel.modificarDia(operacion)
-        actualizardia()
         actualizarSelector(
             c.get(Calendar.YEAR),
             (c.get(Calendar.MONTH) + 1),
             c.get(Calendar.DATE)
         )
 
-        cargarDia()
     }
 
     /**
@@ -98,7 +105,7 @@ class FragmentoEjercicios : Fragment() {
     private fun anadirEjericio(){
         val intentAnadirEjercicio = Intent(context, AnadirEjercicio::class.java)
         intentAnadirEjercicio.putExtra(
-            "dia",viewModel.dia)
+            "dia",viewModel.dia.value)
         startActivityForResult(intentAnadirEjercicio, 1)
     }
 
@@ -107,30 +114,21 @@ class FragmentoEjercicios : Fragment() {
      */
     private fun diaActual(){
         if (binding.selectorEjercicio.visibility == View.VISIBLE) {
-            viewModel.actualizarDiaDP(getString(
+            //cargarDia()
+            binding.selectorEjercicio.visibility = View.GONE
+            viewModel.actualizarDia(context!!.getString(
                 R.string.formatodiamesao,
                 binding.selectorEjercicio.dayOfMonth.toString(),
-                binding.selectorEjercicio.month.toString(),
-                binding.selectorEjercicio.year.toString()
-            ))
-            actualizardia()
-            cargarDia()
-            binding.selectorEjercicio.visibility = View.GONE
-
+                (binding.selectorEjercicio.month+1).toString(),
+                binding.selectorEjercicio.year.toString()))
         } else
             binding.selectorEjercicio.visibility = View.VISIBLE
     }
 
-    private fun actualizardia() {
-        binding.dia.text = viewModel.dia
-    }
     /**
      * En esta funcion se actualiza el dia mes y año seleccionado en el calendario
      */
 
-    private fun cargarDia(){
-        viewAdapter.setItems(viewModel.seleccionarEjercicios(binding.dia.text.toString()))
-    }
 
     private fun actualizarSelector(year:Int, mes:Int, dia:Int){
         binding.selectorEjercicio.updateDate(year,mes,dia)
@@ -140,16 +138,12 @@ class FragmentoEjercicios : Fragment() {
      * En esta actividad se captura lo que devuelve de la actividad AñadirEjercicio
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        try {
             super.onActivityResult(requestCode, resultCode, data)
 
             if (requestCode == 1  && resultCode  == 0) {
                 viewModel.seleccionarEjerciciosDia()
 
             }
-        } catch (ex:Exception) {
-
-        }
 
     }
 }

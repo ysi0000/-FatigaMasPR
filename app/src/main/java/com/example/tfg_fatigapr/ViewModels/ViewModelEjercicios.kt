@@ -81,8 +81,11 @@ class ViewModelEjercicios(private val aplication: Application): AndroidViewModel
         return c
     }
 
-    fun actualizarDiaDP(diaDP:String){
-        dia=diaDP
+    /**
+     * Actualiza el dia a uno nuevo
+     */
+    fun actualizarDia(diaNuevo:String){
+        _dia.value=diaNuevo
     }
 
 }

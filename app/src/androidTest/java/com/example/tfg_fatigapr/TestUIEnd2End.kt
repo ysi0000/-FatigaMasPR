@@ -28,16 +28,29 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.tfg_fatigapr.TestUtils.withRecyclerView
 
-
+/**
+ * Test en emulador realizado para comprobar el funcionamiento de botones y elementos de la
+ * interfaz de la aplicacion
+ *
+ * @author Yeray Sardon Ibañez
+ */
 @RunWith(AndroidJUnit4ClassRunner::class)
 @LargeTest
 class TestUIEnd2End{
-
+    /**
+     * Antes de realizar ningun test se debe lanzar el fragmento en el que se inicia la aplicacion
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @Before
     fun setup() {
         FragmentScenario.launchInContainer(FragmentoEjercicios::class.java)
     }
-
+    /**
+     * Funcion que permite capturar el boton para acceder al menu
+     *
+     * @author Yeray Sardon Ibañez
+     */
     fun <T : Activity> ActivityScenario<T>.getToolbarNavigationContentDescription()
             : String {
         var description = ""
@@ -47,8 +60,12 @@ class TestUIEnd2End{
         }
         return description
     }
-
-    //@Test
+    /**
+     * Test para comprobar la apertura y el cierre de la barra de menu
+     *
+     * @author Yeray Sardon Ibañez
+     */
+    @Test
     fun comprobarNav_AbiertoCerrado(){
         val activityScenario=ActivityScenario.launch(MainActivity::class.java)
         //Nav View Cerrado
@@ -68,8 +85,12 @@ class TestUIEnd2End{
             .check(matches(isClosed(Gravity.START)))
         activityScenario.close()
     }
-
-    //@Test
+    /**
+     * Se abren todos los fragmentos para comprobar que no haya ningun fallo
+     *
+     * @author Yeray Sardon Ibañez
+     */
+    @Test
     fun comprobarAperturaFragmentos(){
         val activityScenario=ActivityScenario.launch(MainActivity::class.java)
 
@@ -112,6 +133,11 @@ class TestUIEnd2End{
 
     }
 
+    /**
+     * Se abren todos los fragmentos para comprobar que no haya ningun fallo
+     *
+     * @author Yeray Sardon Ibañez
+     */
 
     class RecyclerViewItemCountAssertion(expCount:Int) : ViewAssertion {
          var expectedCount:Int=0
@@ -132,7 +158,11 @@ class TestUIEnd2End{
         }
     }
 
-
+    /**
+     * Se comprueba que se puede añadir un ejercicio
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @Test
     fun comprobar_anadirEjercicio(){
         val activityScenario=ActivityScenario.launch(MainActivity::class.java)
@@ -152,7 +182,11 @@ class TestUIEnd2End{
             .perform(click())
         //onView(withId(R.id.recycler_ejercicios)).perform(RecyclerViewActions.actionOnItemAtPosition<AdaptadorEjercicios.MyViewHolder>(1,click()))
     }
-
+    /**
+     * Se comprueba que se puede añadir una serie
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @Test
     fun anadirSerie(){
         onView(withId(R.id.tv_anadirSerie)).perform(click())

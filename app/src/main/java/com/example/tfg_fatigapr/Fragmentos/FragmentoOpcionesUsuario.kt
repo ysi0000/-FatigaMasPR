@@ -4,7 +4,6 @@ package com.example.tfg_fatigapr.Fragmentos
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceScreen
@@ -13,7 +12,7 @@ import com.example.tfg_fatigapr.Utilidades.RoomDataBase
 
 
 /**
- * A simple [Fragment] subclass.
+ * Clase que resulelve la logica del fragmento de opciones de usuario
  */
 class FragmentoOpcionesUsuario : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
     private lateinit var db: RoomDataBase
@@ -33,6 +32,9 @@ class FragmentoOpcionesUsuario : PreferenceFragmentCompat(), OnSharedPreferenceC
         }
     }
 
+    /**
+     * Setter de las opciones de usuario
+     */
     private fun setPreferenceSummary(
         preference: Preference,
         value: String
@@ -40,6 +42,9 @@ class FragmentoOpcionesUsuario : PreferenceFragmentCompat(), OnSharedPreferenceC
         preference.summary = value
     }
 
+    /**
+     * Fucnion que al cambiar una de las opciones la guarda en un valor
+     */
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         val preference:Preference? = findPreference(key)
         if (null != preference) { // Updates the summary for the preference
@@ -48,13 +53,19 @@ class FragmentoOpcionesUsuario : PreferenceFragmentCompat(), OnSharedPreferenceC
         }
     }
 
-
+    /**
+     * Se sobreescribe para que en la creacion del fragmente se registre el listener
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferenceScreen.sharedPreferences
             .registerOnSharedPreferenceChangeListener(this)
     }
 
+    /**
+     * Se sobreescribe esta funcion para que al destriur el fragmento se quite el listener y evitar
+     * perdidas de memoria
+     */
     override fun onDestroy() {
         super.onDestroy()
 

@@ -10,7 +10,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Created by dannyroa on 5/10/15.
+ * Clase para evitar fallos en los recyclerviews dado que espresso no tiene soporte
+ *
+ * @author Created by dannyroa on 5/10/15.
+ *
  */
 public class RecyclerViewMatcher {
     private final int recyclerViewId;

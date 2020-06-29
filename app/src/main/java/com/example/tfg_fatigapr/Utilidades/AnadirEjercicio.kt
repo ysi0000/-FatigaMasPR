@@ -16,6 +16,11 @@ import com.example.tfg_fatigapr.clasesDatos.Ejercicio
 import com.example.tfg_fatigapr.databinding.ActivityAnadirEjercicioBinding
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Actividad que permite añadir un ejercicio
+ *
+ * @author Yeray Sardón Ibañez
+ */
 
 class AnadirEjercicio : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
@@ -23,7 +28,8 @@ class AnadirEjercicio : AppCompatActivity() {
     lateinit var dia:String
     private lateinit var binding:ActivityAnadirEjercicioBinding
     private var nomEjercicio:String=""
-    private var nomModificacion=arrayOf("Barra","Ninguno","Estandar","Ninguno","Estandar","Estandar")
+    private var modEstandar="Estandar"
+    private var nomModificacion=arrayOf("Barra","Ninguno",modEstandar,"Ninguno",modEstandar,modEstandar)
     private lateinit var viewModel: ViewModelEjercicios
     private lateinit var ejercicios:Array<String>
     private lateinit var tironVertical:Array<String>
@@ -39,7 +45,11 @@ class AnadirEjercicio : AppCompatActivity() {
     private lateinit var tempo:Array<String>
     private lateinit var agarre:Array<String>
 
-
+    /**
+     * Al crear la actividad se inicializan las listas de eleccion del ejercicio
+     *
+     * @author Yeray Sardón Ibañez
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mFireBaseAuth=FirebaseAuth.getInstance()
@@ -47,7 +57,7 @@ class AnadirEjercicio : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         dia=intent.getStringExtra("dia")!!
         viewModel= ViewModelProvider(this,
-            ViewModelEjerciciosFactory(this)
+            ViewModelEjerciciosFactory(application)
         ).get(ViewModelEjercicios::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_anadir_ejercicio)
 
@@ -61,13 +71,17 @@ class AnadirEjercicio : AppCompatActivity() {
         dominantesDeCadera= arrayOf("Peso Muerto Convencional","Peso Muerto Sumo","Buenos Dias","Hip Thrust","Peso Muerto Rumano","Peso Muerto Piernas Semirrigidas")
         tipoBarra= arrayOf("Barra","Mancuernas","SSB","Hexagonal")
         cargaAcumulativa= arrayOf("Ninguna","Cadenas","Bandas")
-        recorrido= arrayOf("Estandar","Pines Bajos","Pines Altos","Pines Medios","Deficit","Cajon","Tabla")
+        recorrido= arrayOf(modEstandar,"Pines Bajos","Pines Altos","Pines Medios","Deficit","Cajon","Tabla")
         equipamiento= arrayOf("Ninguno","Cinturon","Rodilleras")
-        tempo= arrayOf("Estandar","Touch & Go","2ct Parada","3ct Parada","Tempo 600","Tempo 320","Tempo 530","Tempo 303","5ct Parada","7ct Parada")
-        agarre= arrayOf("Estandar","Barra Alta","Barra Baja","Agarre Ancho","Agarre Estrecho","Agarre Snach")
+        tempo= arrayOf(modEstandar,"Touch & Go","2ct Parada","3ct Parada","Tempo 600","Tempo 320","Tempo 530","Tempo 303","5ct Parada","7ct Parada")
+        agarre= arrayOf(modEstandar,"Barra Alta","Barra Baja","Agarre Ancho","Agarre Estrecho","Agarre Snach")
     }
 
-
+    /**
+     * Funcion que se llama al pulsar en cualquier opcion de modificaciones
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarEjercicio(view:View){
         val builderEjercicio: AlertDialog.Builder = AlertDialog.Builder(this)
         builderEjercicio.setTitle("Elige un ejercicio")
@@ -119,6 +133,11 @@ class AnadirEjercicio : AppCompatActivity() {
 
     }
 
+    /**
+     * La siguiente funcion se llama al clickar al boton de la modificacion de tipo de barra
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarTipoBarra(view:View) {
         val builderTipoBarra: AlertDialog.Builder = AlertDialog.Builder(this)
         builderTipoBarra.setTitle("Elige el tipo de barra")
@@ -129,7 +148,11 @@ class AnadirEjercicio : AppCompatActivity() {
         builderTipoBarra.show()
 
     }
-
+    /**
+     * La siguiente funcion se llama al clickar al boton de la modificacion de carga acumulativa
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarCargaAcumulativa(view:View) {
         val builderCargaAcumulativa: AlertDialog.Builder = AlertDialog.Builder(this)
         builderCargaAcumulativa.setTitle("Elige acumulación de carga")
@@ -140,7 +163,11 @@ class AnadirEjercicio : AppCompatActivity() {
         builderCargaAcumulativa.show()
 
     }
-
+    /**
+     * La siguiente funcion se llama al clickar al boton de la modificacion de recorrido
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarRecorrido(view:View) {
         val builderRecorrido: AlertDialog.Builder = AlertDialog.Builder(this)
         builderRecorrido.setTitle("Elige el el recorrido del ejercicio")
@@ -151,7 +178,11 @@ class AnadirEjercicio : AppCompatActivity() {
         builderRecorrido.show()
 
     }
-
+    /**
+     * La siguiente funcion se llama al clickar al boton de la modificacion de equipamiento
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarEquipamiento(view:View) {
         val builderEquipamiento: AlertDialog.Builder = AlertDialog.Builder(this)
         builderEquipamiento.setTitle("Elige el tipo de equipamiento")
@@ -162,7 +193,11 @@ class AnadirEjercicio : AppCompatActivity() {
         builderEquipamiento.show()
 
     }
-
+    /**
+     * La siguiente funcion se llama al clickar al boton de la modificacion de tempo
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarTempo(view:View) {
         val builderTempo: AlertDialog.Builder = AlertDialog.Builder(this)
         builderTempo.setTitle("Elige el tempo del ejercicio")
@@ -173,7 +208,11 @@ class AnadirEjercicio : AppCompatActivity() {
         builderTempo.show()
 
     }
-
+    /**
+     * La siguiente funcion se llama al clickar al boton de la modificacion de agarre
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun seleccionarAgarre(view:View) {
         val builderAgarre: AlertDialog.Builder = AlertDialog.Builder(this)
         builderAgarre.setTitle("Elige el tipo de agarre")
@@ -185,6 +224,11 @@ class AnadirEjercicio : AppCompatActivity() {
 
     }
 
+    /**
+     * Funcion que se llama al pulsar el boton de añadir ejercicio
+     *
+     * @author Yeray Sardón Ibañez
+     */
         fun anadirEj(view:View) {
             if(nomEjercicio!="") {
                 viewModel.insertarEjercicio(
@@ -203,18 +247,22 @@ class AnadirEjercicio : AppCompatActivity() {
                 Toast.makeText(this,"Selecciona un ejercicio primero",Toast.LENGTH_LONG).show()
 
     }
-
+    /**
+     * La siguiente funcion se llama para devolver la modificacion/es seleccionada/s
+     *
+     * @author Yeray Sardón Ibañez
+     */
     fun nombreModificacion(): String {
         var nombreMod=""
         if(nomModificacion[0] != "Barra")
             nombreMod+=nomModificacion[0]+" "
         if(nomModificacion[1]!="Ninguno")
             nombreMod+=nomModificacion[1]+" "
-        if(nomModificacion[2]!="Estandar")
+        if(nomModificacion[2]!=modEstandar)
             nombreMod+=nomModificacion[2]+" "
-        if(nomModificacion[4]!="Estandar")
+        if(nomModificacion[4]!=modEstandar)
             nombreMod+=nomModificacion[4]+" "
-        if(nomModificacion[5]!="Estandar")
+        if(nomModificacion[5]!=modEstandar)
             nombreMod+=nomModificacion[4]+" "
         return nombreMod
     }

@@ -16,7 +16,9 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 /**
- * Created by dannyroa on 5/9/15.
+ * Clase para evitar fallos en los recyclerviews dado que espresso no tiene soporte
+ *
+ * @author Created by dannyroa on 5/9/15.
  */
 public class TestUtils {
 

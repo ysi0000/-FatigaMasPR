@@ -41,6 +41,7 @@ class FragmentoPR :Fragment() {
     private lateinit var yAxis:YAxis
     private lateinit var xAxis:XAxis
     private var ejercicioSel="Ejercicio Press Banca Principal"
+    private var error="Error"
     private lateinit var xVal:ArrayList<String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -198,7 +199,7 @@ class FragmentoPR :Fragment() {
      * Elige la modificacion de sentadilla elegida en opciones
      */
     private fun modificacionSentadilla():String{
-        return when(sharedPreferences.getString(getString(R.string.pref_Ejercicio_Sentadilla),"Error")){
+        return when(sharedPreferences.getString(getString(R.string.pref_Ejercicio_Sentadilla),error)){
             "Sentadilla 2ct Parada"->"2ct Parada "
             "Sentadilla Pines"->"Pines"
             else->""
@@ -208,7 +209,7 @@ class FragmentoPR :Fragment() {
      * Elige la modificacion de peso muerto elegida en opciones
      */
     private fun modificacionMuerto():String{
-        return when(sharedPreferences.getString(getString(R.string.key_editpref_Muerto),"Error")){
+        return when(sharedPreferences.getString(getString(R.string.key_editpref_Muerto),error)){
             "Peso Muerto Sumo 2ct Parada"->"2ct Parada "
             "Peso Muerto Convencional 2ct Parada"->"2ct Parada "
             else->""
@@ -220,7 +221,7 @@ class FragmentoPR :Fragment() {
      */
     private fun construirGrafica(lineChartView:LineChart){
         xVal= dias
-        val lineDataSet = LineDataSet(dataValues(xVal), "Volumen")
+        val lineDataSet = LineDataSet(dataValues(xVal), error)
         val datasets = ArrayList<ILineDataSet>()
         lineDataSet.color= Color.RED
         lineDataSet.lineWidth=4f

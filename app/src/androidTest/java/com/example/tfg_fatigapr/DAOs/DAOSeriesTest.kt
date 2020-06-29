@@ -16,37 +16,59 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
+/**
+ * Clase de tests de Series, en este test se comprobaran si añadir,modificar o eliminar series se
+ * realiza de manera correcta
+ *
+ * @author Yeray Sardon Ibañez
+ */
 @RunWith(AndroidJUnit4ClassRunner::class)
 @SmallTest
 class DAOSeriesTest {
 
-
-
-        // Executes each task synchronously using Architecture Components.
+    /**
+     * Esta regla hace que todas las acciones se realizen de forma sincrona, cosa que mantiene los
+     * resultados en orden y sin sorpresas
+     *
+     * @author Yeray Sardon Ibañez
+     */
         @get:Rule
         var instantExecutorRule = InstantTaskExecutorRule()
 
         private lateinit var database: RoomDataBase
+    /**
+     * Antes de realizar ningun test se inicializa la base de datos
+     *
+     * @author Yeray Sardon Ibañez
+     */
+    @Before
+    fun initDb() {
+        // Using an in-memory database so that the information stored here disappears when the
+        // process is killed.
+        database = Room.inMemoryDatabaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            RoomDataBase::class.java
+        ).build()
+    }
 
-        @Before
-        fun initDb() {
-            // Using an in-memory database so that the information stored here disappears when the
-            // process is killed.
-            database = Room.inMemoryDatabaseBuilder(
-                ApplicationProvider.getApplicationContext(),
-                RoomDataBase::class.java
-            ).build()
-        }
+    /**
+     * Despues de realizar los tests se cierra la base de datos para evitar perdidas de memoria
+     *
+     * @author Yeray Sardon Ibañez
+     */
+    @After
+    fun closeDb() = database.close()
 
-        @After
-        fun closeDb() = database.close()
-
-
+    /**
+     * Se realizan los tests de insertar y eliminar series a un ejercicio
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @Test
     fun insertaryEliminarSerie() {
         // GIVEN - Insert a task.
-        val serie = Serie(0,0,0,0,"1-1-20",0)
+        val datosIniciales=0
+        val serie = Serie(datosIniciales,datosIniciales,datosIniciales,datosIniciales,"1-1-20",datosIniciales)
         database.serieDAO().insertarSerie(serie)
 
         // WHEN - Get the task by id from the database.
@@ -71,6 +93,11 @@ class DAOSeriesTest {
         MatcherAssert.assertThat(loadedEliminar.size, `is`(0))
     }
 
+    /**
+     * En este test se actualiza el peso, RPE y repeticiones de las Series
+     *
+     * @author Yeray Sardon Ibañez
+     */
     fun actualizarDatosSerie(){
         val dia="1-1-20"
         val serie = Serie(0,0,0,0,"1-1-20",0)

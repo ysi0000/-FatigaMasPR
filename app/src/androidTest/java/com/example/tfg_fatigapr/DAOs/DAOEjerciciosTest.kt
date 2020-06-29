@@ -16,17 +16,32 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * Clase de tests de Ejercicios, en este test se comprobaran si añadir,modificar o eliminar ejercicios se
+ * realiza de manera correcta
+ *
+ * @author Yeray Sardon Ibañez
+ */
 @RunWith(AndroidJUnit4ClassRunner::class)
 @SmallTest
 
 class DAOEjerciciosTest {
 
-    // Executes each task synchronously using Architecture Components.
+    /**
+     * Esta regla hace que todas las acciones se realizen de forma sincrona, cosa que mantiene los
+     * resultados en orden y sin sorpresas
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var database: RoomDataBase
-
+    /**
+     * Antes de realizar ningun test se inicializa la base de datos
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @Before
     fun initDb() {
         // Using an in-memory database so that the information stored here disappears when the
@@ -36,11 +51,19 @@ class DAOEjerciciosTest {
             RoomDataBase::class.java
         ).build()
     }
-
+    /**
+     * Despues de realizar los tests se cierra la base de datos para evitar perdidas de memoria
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @After
     fun closeDb() = database.close()
 
-
+    /**
+     * Se realizan los tests de insertar y eliminar ejercicios
+     *
+     * @author Yeray Sardon Ibañez
+     */
     @Test
     fun insertaryeliminarEjercicio() {
         // GIVEN - Insert a task.
