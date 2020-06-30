@@ -91,7 +91,7 @@ class FragmentoEjercicios : Fragment() {
         val c=viewModel.modificarDia(operacion)
         actualizarSelector(
             c.get(Calendar.YEAR),
-            (c.get(Calendar.MONTH) + 1),
+            (c.get(Calendar.MONTH)),
             c.get(Calendar.DATE)
         )
 
