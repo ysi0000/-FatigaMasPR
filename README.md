@@ -23,16 +23,16 @@ En este momento solo se necesitará inicar la aplicación.
 
 ### Seguimiento de tu planificación en el gimnasio
 
-###Posibilidad de personalización
+### Posibilidad de personalización
 
 ![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2011.46.15.png)
 
-![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.41.25.png)
+![imageU,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.41.25.png)
 
 ### Graficas
 
-![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.38.59.png)
+![imageB,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.38.59.png)
 
-###Varias posibilidades de inicio de sesión
+### Varias posibilidades de inicio de sesión
 
-![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.32.33.png)
+![imageC,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.32.33.png)
