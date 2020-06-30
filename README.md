@@ -10,8 +10,29 @@ Para conseguir averiguar si se ha conseguido ir mejorando las marcas de competic
 
 ## Instalacion
 
-La instalación en un dispositivo móvil sera sencilla solo se necesitara descargar la apk en el dispositivo movil e instalarlo desde este
+La instalación en un dispositivo móvil sera sencilla solo se necesitara descargar la [APK](https://github.com/ysi0000/-FatigaMasPR/blob/master/app/release/app-release.apk) en el dispositivo movil e instalarlo desde este.
+
+La instalación una vez descargada la apk habrá simplemente que seguir los pasos de la instalación
+
+Es posible que se necesiten activar las instalaciones de dispositivos de terceros, para activar esta opcion
+se te redireccionará a una pantalla de ajustes para aceptarlo.
+
+En este momento solo se necesitará inicar la aplicación.
 
 ## Opciones de la aplicacion
 
+### Seguimiento de tu planificación en el gimnasio
+
+###Posibilidad de personalización
+
+![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2011.46.15.png)
+
+![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.41.25.png)
+
 ### Graficas
+
+![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.38.59.png)
+
+###Varias posibilidades de inicio de sesión
+
+![image,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.32.33.png)
