@@ -19,9 +19,15 @@ se te redireccionará a una pantalla de ajustes para aceptarlo.
 
 En este momento solo se necesitará inicar la aplicación.
 
-## Opciones de la aplicacion
+## Videos de la aplicación
 
-### Seguimiento de tu planificación en el gimnasio
+Pulse las imagenes para la redirección
+
+[![Watch the video](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2011.46.15.png)](https://www.youtube.com/watch?v=1ZRhmhdU6YU)
+
+[![Watch the video](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.38.59.png)](https://www.youtube.com/watch?v=1ZRhmhdU6YU)
+
+## Opciones de la aplicacion
 
 ### Posibilidad de personalización
 
@@ -36,3 +42,26 @@ En este momento solo se necesitará inicar la aplicación.
 ### Varias posibilidades de inicio de sesión
 
 ![imageC,20%](https://github.com/ysi0000/-FatigaMasPR/blob/master/img/Captura%20de%20pantalla%202020-06-25%20a%20las%2012.32.33.png)
+
+# -FatigaMasPR
+-Fatiga + PR is a project that aims to monitor training variables in order to improve strength and competitiveness in powerlifting.
+
+By controlling these training variables it is expected to be able to control the fatigue that training generates in the body.
+
+
+To achieve the goal of reducing fatigue, the progress of the training volume that has been carried out daily throughout the previous six days will be taken. This progress will be made with graphics since it is the most visual method.
+
+In order to find out if the competition marks have been improved, the estimated marks will be calculated from your training, with these approximations we will be able to see if the improved mark indicates that the proposed training works, and otherwise it will help us to know that need some changes.
+
+## Installation
+
+Installation on a mobile device will be simple, all you need to do is download the [APK](https://github.com/ysi0000/-FatigaMasPR/blob/master/app/release/app-release.apk) on the mobile device and install it from this.
+
+Once the apk is downloaded, the installation will simply follow the installation steps.
+
+It may be necessary to activate the installations of third-party devices, to activate this option
+you will be redirected to a settings screen to accept it.
+
+At this time you will only need to start the application.
+
+
