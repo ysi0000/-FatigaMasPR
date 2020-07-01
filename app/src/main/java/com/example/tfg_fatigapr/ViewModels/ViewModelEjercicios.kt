@@ -62,7 +62,12 @@ class ViewModelEjercicios(private val aplication: Application): AndroidViewModel
     fun ejerciciosDia(): Int {
         return ejerciciosDao.ejerciciosDia(_dia.value!!,usuario)
     }
-
+    /**
+     * funcion que devulve el numero de ejercicios de un dia a partir de uno especifico
+     */
+    fun ejerciciosDia(dia:String): Int {
+        return ejerciciosDao.ejerciciosDia(dia,usuario)
+    }
     /**
      *
      */

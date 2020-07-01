@@ -1,6 +1,7 @@
 package com.example.tfg_fatigapr.Fragmentos
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -94,7 +95,6 @@ class FragmentoEjercicios : Fragment() {
             (c.get(Calendar.MONTH)),
             c.get(Calendar.DATE)
         )
-
     }
 
     /**
@@ -132,18 +132,6 @@ class FragmentoEjercicios : Fragment() {
 
     private fun actualizarSelector(year:Int, mes:Int, dia:Int){
         binding.selectorEjercicio.updateDate(year,mes,dia)
-
-    }
-    /**
-     * En esta actividad se captura lo que devuelve de la actividad AñadirEjercicio
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            if (requestCode == 1  && resultCode  == 0) {
-                viewModel.seleccionarEjerciciosDia()
-
-            }
 
     }
 }

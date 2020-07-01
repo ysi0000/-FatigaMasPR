@@ -1,6 +1,8 @@
 package com.example.tfg_fatigapr.Utilidades
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -233,7 +235,7 @@ class AnadirEjercicio : AppCompatActivity() {
             if(nomEjercicio!="") {
                 viewModel.insertarEjercicio(
                     Ejercicio(
-                        viewModel.ejerciciosDia(),
+                        viewModel.ejerciciosDia(dia),
                         nomEjercicio,
                         nombreModificacion(),
                         dia,
@@ -241,6 +243,9 @@ class AnadirEjercicio : AppCompatActivity() {
                             mFireBaseAuth.currentUser!!.displayName)!!
                     )
                 )
+                val intent=Intent()
+                intent.putExtra("dia",dia)
+                setResult(Activity.RESULT_OK,intent)
                 finish()
             }
             else

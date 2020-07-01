@@ -140,7 +140,11 @@ class FragmentoPR :Fragment() {
                 serie=viewModelSerie.seriesPorEjYDia("Press Banca",modificacionBanca(),dia)
             }
             getString(R.string.ej_Peso_Muerto_principal)->{
-                serie=viewModelSerie.seriesPorEjYDia("Peso Muerto",modificacionMuerto(),dia)
+                if(sharedPreferences.getString("Peso Muerto",error)=="Peso Muerto Sumo"){
+                    serie=viewModelSerie.seriesPorEjYDia("Peso Muerto Sumo",modificacionMuerto(),dia)
+                }else {
+                    serie = viewModelSerie.seriesPorEjYDia("Peso Muerto", modificacionMuerto(), dia)
+                }
             }
             getString(R.string.ej_Sentadilla_principal)->{
                 serie=viewModelSerie.seriesPorEjYDia("Sentadilla",modificacionSentadilla(),dia)
@@ -209,7 +213,7 @@ class FragmentoPR :Fragment() {
      * Elige la modificacion de peso muerto elegida en opciones
      */
     private fun modificacionMuerto():String{
-        return when(sharedPreferences.getString(getString(R.string.key_editpref_Muerto),error)){
+        return when(sharedPreferences.getString("Peso Muerto",error)){
             "Peso Muerto Sumo 2ct Parada"->"2ct Parada "
             "Peso Muerto Convencional 2ct Parada"->"2ct Parada "
             else->""
