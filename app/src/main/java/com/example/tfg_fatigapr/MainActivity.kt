@@ -14,10 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.preference.PreferenceManager
-import com.example.tfg_fatigapr.Fragmentos.FragmentoEjercicios
-import com.example.tfg_fatigapr.Fragmentos.FragmentoGraficas
-import com.example.tfg_fatigapr.Fragmentos.FragmentoOpcionesUsuario
-import com.example.tfg_fatigapr.Fragmentos.FragmentoPR
+import com.example.tfg_fatigapr.Fragmentos.*
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.AuthUI.IdpConfig.*
 import com.google.android.material.navigation.NavigationView
@@ -175,6 +172,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     supportFragmentManager.beginTransaction().replace(
                         R.id.fragment_container,
                         FragmentoOpcionesUsuario()
+                    ).commit()
+                }
+                R.id.nav_ayuda -> {
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.fragment_container,
+                        FragmentoAyuda()
                     ).commit()
                 }
                 R.id.nav_signOut->{

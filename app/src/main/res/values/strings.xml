@@ -80,6 +80,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cerrar_sesion">Cerrar Sesion</string>
-
+    <string name="ayuda_comentarios">Ayuda y comentarios</string>
+    <string name="ayuda">Ayuda</string>
 
 </resources>

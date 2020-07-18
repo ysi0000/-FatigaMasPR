@@ -33,6 +33,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/Adaptadores/AdaptadorAyuda.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/Adaptadores/AdaptadorEjercicios.kt">
           <value>
             <set />
@@ -48,6 +53,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/Fragmentos/FragmentoAyuda.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/Fragmentos/FragmentoEjercicios.kt">
           <value>
             <set />
@@ -59,6 +69,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/Fragmentos/FragmentoPR.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/MainActivity.kt">
           <value>
             <set />
           </value>
@@ -88,7 +103,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/clasesDatos/Ayuda.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/clasesDatos/Ejercicio.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/tfg_fatigapr/clasesDatos/Serie.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/ayuda.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/ejercicio.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/layout/elemento_ayuda.xml">
           <value>
             <set />
           </value>
@@ -104,6 +144,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/series.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
           <value>
             <set />
           </value>
