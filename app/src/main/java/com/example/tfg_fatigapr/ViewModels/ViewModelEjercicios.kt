@@ -49,6 +49,7 @@ class ViewModelEjercicios(private val aplication: Application): AndroidViewModel
         _ejercicios.value= ejerciciosDao.seleccionarEjercicios(usuario)
     }
 
+
     /**
      * Funcion para seleccionar un ejercicio de la base de datos
      */

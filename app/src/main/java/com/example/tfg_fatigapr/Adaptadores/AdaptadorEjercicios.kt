@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tfg_fatigapr.Utilidades.DeslizarParaBorrar
 import com.example.tfg_fatigapr.R
+import com.example.tfg_fatigapr.ViewModels.ViewModelEjercicios
 import com.example.tfg_fatigapr.ViewModels.ViewModelSeries
 import com.example.tfg_fatigapr.clasesDatos.Ejercicio
-import android.util.Log
 
 /**
  * Clase para controlar el RecyclerView de los ejercicios
@@ -20,12 +20,13 @@ import android.util.Log
  * @author Yeray Sardon Ibañez
  *
  */
-class AdaptadorEjercicios (viewModelSerie: ViewModelSeries):
+class AdaptadorEjercicios (viewModelSerie: ViewModelSeries,viewModelEjercicios: ViewModelEjercicios):
     RecyclerView.Adapter<AdaptadorEjercicios.MyViewHolder>() {
     private var myDataset: List<Ejercicio> = emptyList()
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private var viewModeSerie: ViewModelSeries =viewModelSerie
+    private var viewModelEjercicios: ViewModelEjercicios =viewModelEjercicios
 
     /**
      * Clase que alberga las views del interior del RecyclerView
@@ -35,6 +36,7 @@ class AdaptadorEjercicios (viewModelSerie: ViewModelSeries):
         var textView:TextView = view.findViewById(R.id.tv_ejercicio)
         var recyclerView:RecyclerView = view.findViewById(R.id.recycler_series)
         var anadirSerie:TextView=view.findViewById(R.id.tv_anadirSerie)
+        var eliminarEjercicio:TextView=view.findViewById(R.id.tv_eliminarEjercicio)
     }
 
     /**
@@ -55,6 +57,11 @@ class AdaptadorEjercicios (viewModelSerie: ViewModelSeries):
         holder.anadirSerie.setOnClickListener {
             viewModeSerie.insertarSerie(ejercicioActual.id)
             notifyDataSetChanged()
+        }
+        holder.eliminarEjercicio.setOnClickListener {
+            viewModelEjercicios.borrarEjercicio(ejercicioActual)
+            viewModeSerie.borrarSerieEjercicio(ejercicioActual.id,ejercicioActual.dia)
+            viewModelEjercicios.actualizarDia(ejercicioActual.dia)
         }
         holder.recyclerView.apply {
             setHasFixedSize(true)

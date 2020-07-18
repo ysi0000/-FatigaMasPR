@@ -13,6 +13,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/tamaño_ejercicios"
+            android:textColor="@color/colorBlanco"
+            android:id="@+id/tv_eliminarEjercicio"
+            android:layout_weight="8"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_clear_all_black_24dp"
+            />
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/tamaño_ejercicios"
             android:gravity="center"
             android:textColor="@color/colorBlanco"
             android:background="@color/colorPrimary"

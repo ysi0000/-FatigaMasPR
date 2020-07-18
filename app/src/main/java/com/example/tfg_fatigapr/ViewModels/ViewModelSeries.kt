@@ -27,6 +27,13 @@ class ViewModelSeries(context: Context):ViewModel(){
     }
 
     /**
+     * Permite borrar una serie de un ejercicio
+     */
+    fun borrarSerieEjercicio(idEjercicio: Int,dia:String){
+        seriesDao.eliminarSeriesEjercicio(idEjercicio,dia)
+    }
+
+    /**
      * Permite seleccionar todas las series
      */
     fun seleccionarSeries() {

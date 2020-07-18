@@ -35,6 +35,13 @@ interface DAOSeries{
     @Delete
     fun eliminarSerie(serie:Serie)
     /**
+     * Funcion para eliminar una serie en la base de datos
+     *
+     * @author Yeray Sardón Ibañez
+     */
+    @Query("DELETE FROM tbSeries WHERE IdEjercicio=:idEjerecicio AND Dia=:dia")
+    fun eliminarSeriesEjercicio(idEjerecicio:Int,dia:String)
+    /**
      * Funcion para seleccionar series en un dia y de un ejercicio en la base de datos
      *
      * @author Yeray Sardón Ibañez

@@ -57,7 +57,6 @@ class FragmentoEjercicios : Fragment() {
         binding.btDiaAnterior.setOnClickListener{modificarDia(-1)}
         binding.btAnadirEjercicio.setOnClickListener { anadirEjericio()}
         binding.dia.setOnClickListener{diaActual()}
-
         viewModel.dia.observe(this, androidx.lifecycle.Observer {nuevoDia->
             binding.dia.text=nuevoDia
             viewModel.seleccionarEjerciciosDia()
@@ -75,7 +74,7 @@ class FragmentoEjercicios : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewAdapter =
             AdaptadorEjercicios(
-                viewModelSerie
+                viewModelSerie,viewModel
             )
         viewManager = LinearLayoutManager(context)
         binding.recyclerEjercicios.apply {

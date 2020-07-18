@@ -33,7 +33,7 @@ interface DAOEjercicios {
      * @author Yeray Sardon Ibañez
      */
     @Delete
-    fun eliminarEjercicio(ejercicio: Ejercicio)
+    fun eliminarEjercicio(Ejercicio: Ejercicio)
     /**
      * Funcion para seleccionar los ejercicios de un usuario en un dia
      *
@@ -48,5 +48,13 @@ interface DAOEjercicios {
      */
     @Query("SELECT COUNT(*) FROM tbEjercicios WHERE Dia=:dia AND Nombre_Usuario=:nombreUsuario")
     fun ejerciciosDia(dia:String,nombreUsuario: String):Int
+    /**
+     * Funcion para añadir los ejercicios a un usuario
+     *
+     * @author Yeray Sardon Ibañez
+     */
+    @Query("SELECT * FROM tbEjercicios WHERE Nombre_Usuario=:nombreUsuario AND Id=:idEj")
+    fun seleccionarEjercicio(nombreUsuario: String,idEj:Int):List<Ejercicio>
+
 
 }
